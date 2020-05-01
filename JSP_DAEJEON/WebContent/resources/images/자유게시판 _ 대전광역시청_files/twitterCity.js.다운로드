@@ -1,0 +1,774 @@
+//$(function(){
+//
+// fn_twitterTimeline();
+//
+// });
+//
+//function fn_twitterTimeline(){
+// var twitterPrm = {
+//
+//  api: 'https://api.twitter.com/1.1/statuses/user_timeline.json',
+//  count: 3, //불러올 타임라인 수
+//  callback: "fn_makedocTwitter",//함수를 호출하여JSON데이터를 넘겨줍니다.
+//
+////트위터개발자페이지에서 생성한 자신의 어플리케이션 정보를 입력하시기 바랍니다.
+////  consumerKey: "5Uhiho4jsRxwg3XsW2HbnA",  
+////  consumerSecret: "8W7nsqxKPUKcdnGZFA1xSPlV3QNX8sJndFO0qIhZQ",
+////  accessToken: "1263760560-t7YiDv9J2wO9AhbX0YWwgDERWk6xnXLZnmAiZSR",
+////  tokenSecret: "k4C88mRt74NPVNoWSH72Q6Yvr1ulvMVBVQKsmRmOT0"
+//    consumerKey : "Mq9MpwAlXHbJeVpbThgg",
+//	consumerSecret : "8OWq9I9on64kle5JpqTyJoNLyqB4P1UKHGriR6SvzEo",
+//	accessToken : "226461081-B15a4abHfDasH3qzcAvV13FX5oALkz6iLfy5xYqd",
+//	tokenSecret : "tH1PPhzVAfxwMYMxoOBKCqZmb0KWJSky0wRoGF7frcdPo"
+// }
+//
+// var oauthMessage ={
+//   method: "GET",
+//   action: twitterPrm.api,
+//   parameters: {
+//    count: twitterPrm.count,
+//    callback: twitterPrm.callback,
+//    oauth_version: "1.0",
+//    oauth_signature_method: "HMAC-SHA1",
+//    oauth_consumer_key: twitterPrm.consumerKey,
+//    oauth_token: twitterPrm.accessToken
+//   }
+//  };
+//
+// //Outh인증관련
+// OAuth.setTimestampAndNonce(oauthMessage);
+// OAuth.SignatureMethod.sign(oauthMessage, {
+//  consumerSecret: twitterPrm.consumerSecret,
+//  tokenSecret: twitterPrm.tokenSecret
+// });
+// //Outh인증끝
+// 
+// //Outh인증하여 URL리턴(jsonType)
+// var twJsonPath = OAuth.addToURL(oauthMessage.action, oauthMessage.parameters);
+//
+// //alert(twJsonPath);
+// $.ajax({
+//  type: oauthMessage.method,
+//  url: twJsonPath,
+//  dataType: "jsonp",
+//  jsonp: false,
+//  cache: true
+// });
+//}
+//
+//function fn_makedocTwitter(data){
+// var timeLine='';
+// var text;
+// var dateObj;
+// for(var i=0, len=data.length;i<len;i++){
+// text = data[i].text;
+//
+// //URL링크
+// text = text.replace(/(https?:\/\/[\S]+)/gi,'<a href="$1">$1</a>');
+//
+// //헤시테그연결
+// text = text.replace(/#(\w+)/gi,'<a href="http://twitter.com/search?q=%23$1">#$1</a>');
+//
+// //멘션연결
+// text = text.replace(/@(\w+)/gi,'<a href="http://twitter.com/$1">@$1</a>');
+// timeLine += "<p>"+data[i].created_at+":"+text+"</p>";
+// }
+// $('#div_snstwitter').html(timeLine);
+//}
+
+
+
+
+
+//
+//function fn_twitterCity(){
+//	
+//	var twitterPrm = {
+//			api : 'https://api.twitter.com/1.1/statuses/user_timeline.json',
+//			count : 15,
+//			callback : "fn_makeTwitterCity",
+//			userId : 'dreamdaejeon',
+//			
+//			consumerKey : "Mq9MpwAlXHbJeVpbThgg",
+//			consumerSecret : "8OWq9I9on64kle5JpqTyJoNLyqB4P1UKHGriR6SvzEo",
+//			accessToken : "226461081-B15a4abHfDasH3qzcAvV13FX5oALkz6iLfy5xYqd",
+//			tokenSecret : "tH1PPhzVAfxwMYMxoOBKCqZmb0KWJSky0wRoGF7frcdPo"
+//	}
+//	
+//	var oauthMessage = {
+//			method : "GET",
+//			action : twitterPrm.api,
+//			parameters : {
+//				count : twitterPrm.count,
+//				screen_name : twitterPrm.userId,
+//				callback : twitterPrm.callback,
+//				oauth_version : "1.0",
+//				oauth_signature_method : "HMAC-SHA1",
+//				oauth_consumer_key : twitterPrm.consumerKey,
+//				oauth_token : twitterPrm.accessToken
+//			}
+//	};
+//	
+//	OAuth.setTimestampAndNonce(oauthMessage);
+//	OAuth.SignatureMethod.sign(oauthMessage,{
+//		consumerSecret : twitterPrm.consumerSecret,
+//		tokenSecret : twitterPrm.tokenSecret
+//	});
+//	
+//	var twJsonPath = OAuth.addToURL(oauthMessage.action, oauthMessage.parameters);
+//	
+//	$.ajax({
+//		type : oauthMessage.method,
+//		url : twJsonPath,
+//		dataType : "jsonp",
+//		jsonp : false,
+//		cache : true
+//	});
+//}
+//
+//function fn_makeTwitterCity(data){
+//	var timeLine = '';
+//	var text;
+//	var url;
+//	var replyUrl;
+//	var writeDate;	
+//	
+//	timeLine += "<ul class='twitter_update_list' id='twitter_update_list_dreamdaejeon' style='display: block; height: 1349px;'>";
+//	
+//	for(var i=0, len=data.length; i<len; i++){
+//		
+//		text = data[i].text;
+//		writeDate = data[i].created_at;
+//		url = 'https://twitter.com/dreamdaejeon/status/'+data[i].id_str;
+//		replyUrl = 'http://twitter.com/?status=@dreamdaejeon%20&in_reply_to_status_id='+data[i].id_str+'&in_reply_to=dreamdaejeon'
+//		
+//		alert(data[i].id_str);
+//		
+//		text = text.replace(/(s?https?:\/\/[-_.!~*'()a-zA-Z0-9;\/:@&=+$,%#]+)/gi,'<a href="$1">$1</a>');
+//		text = text.replace(/#(\w+)/gi,'<a href="http://twitter.com/search?q=%23$1">#$1</a>');
+//		text = text.replace(/#(\w+)/gi,'<a href="http://twitter.com/$1">@$1</a>');	
+//		
+//		if(text.length > 20){
+//			text = text.substring(0,20) + '...';	
+//		}	
+//		
+//		
+//		
+//		
+//		
+//		if(i > 3){
+//			timeLine += "<li id='twitterCity"+i+"' style='display:none'><span class='tw_top'><strong>대전광역시_드림대전</strong>dreamdaejeon</span><span class='twt_content'>"+text+"</span> <span class=\'tw_timeline\'><a class='twt_time' href="+url+" target='_blank'>"+relative_time(data[i].created_at)+"</a> <span class='twt_slash'>/</span> <a class='twt_reply' href="+replyUrl+" target='_blank'>reply</a><span></li>";		
+//			             
+//		}else{
+//			timeLine += "<li id='twitterCity"+i+"'><span class='tw_top'><strong>대전광역시_드림대전</strong>dreamdaejeon</span><span class='twt_content'>"+text+"</span> <span class=\'tw_timeline\'><a class='twt_time' href="+url+" target='_blank'>"+relative_time(data[i].created_at)+"</a> <span class='twt_slash'>/</span> <a class='twt_reply' href="+replyUrl+" target='_blank'>reply</a><span></li>";					     
+//		}
+//		
+//																	   
+//																	 
+//	
+//		//timeLine += "<li>"+text+"</li>"+relative_time(data[i].created_at)+"</ br>";
+//		//timeLine += "<li>"+text+"</li></ br>";
+//	}
+//	timeLine += "</ul>";
+//	
+//	$('#twitter_dreamdaejeon').html(timeLine);
+//}
+//
+//function relative_time(time_value) {	
+//	var values = time_value.split(" "); 	
+//	time_value1 = values[0] + ", " + values[2] + " " + values[1] + " " + values[5] + " " + values[3] + " GMT";		
+//	var parsed_date = Date.parse(time_value1);
+//	var relative_to = (arguments.length > 1) ? arguments[1] : new Date(); 
+//	var delta = parseInt((relative_to.getTime() - parsed_date) / 1000); 
+//	if (delta < 60) { 
+//		return '약 몇분전'; 
+//	} else if(delta < (45*60)) { 
+//		return (parseInt(delta / 60)).toString() + ' 분전'; 
+//	} else if(delta < (90*60)) { 
+//		return '약 한시간전'; 
+//	} else if(delta < (24*60*60)) { 
+//		return '약 ' + parseInt(delta / 3600).toString() + ' 시간전'; 
+//	} else if(delta < (48*60*60)) { 
+//		return '1 일전'; 
+//	} else { 
+//		return parseInt(delta / 86400).toString() + ' 일전'; 
+//	} 
+//	
+//	
+////	var values = time_value.split(" "); 
+////	time_value = values[1] + " " + values[2] + ", " + values[4] + " " + values[3];
+////	alert(time_value);
+////	var parsed_date = Date.parse(time_value); 
+////	alert(parsed_date);
+////	var relative_to = (arguments.length > 1) ? arguments[1] : new Date(); 
+////	var delta = parseInt((relative_to.getTime() - parsed_date) / 1000); 
+////	if (delta < 60) { 
+////		return '약 몇분전'; 
+////	} else if(delta < (45*60)) { 
+////		return (parseInt(delta / 60)).toString() + ' 분전'; 
+////	} else if(delta < (90*60)) { 
+////		return '약 한시간전'; 
+////	} else if(delta < (24*60*60)) { 
+////		return '약 ' + parseInt(delta / 3600).toString() + ' 시간전'; 
+////	} else if(delta < (48*60*60)) { 
+////		return '1 일전'; 
+////	} else { 
+////		return parseInt(delta / 86400).toString() + ' 일전'; 
+////	} 
+//}
+//
+//
+//function fn_twitterCityPage(cmd){
+//	
+//	var page = document.getElementById("twitterCityCurrentPage").value;
+//	
+//	
+//	
+//	if(page == '1'){
+//			
+//		$("#twitterCity0").hide();
+//		$("#twitterCity1").hide();
+//		$("#twitterCity2").hide();		
+//		
+//		if(cmd == 'before'){
+//			document.getElementById("twitterCityCurrentPage").value = 5;
+//			document.getElementById("twitterCityPage").innerHTML = 5;
+//			
+//			$("#twitterCity12").show();
+//			$("#twitterCity13").show();
+//			$("#twitterCity14").show();			
+//			
+//		}else{
+//			document.getElementById("twitterCityCurrentPage").value = 2;
+//			document.getElementById("twitterCityPage").innerHTML = 2;
+//			
+//			$("#twitterCity3").show();
+//			$("#twitterCity4").show();
+//			$("#twitterCity5").show();			
+//			
+//		}		
+//		
+//	}else if(page == '2'){
+//		
+//		$("#twitterCity3").hide();
+//		$("#twitterCity4").hide();
+//		$("#twitterCity5").hide();		
+//		
+//		if(cmd == 'before'){
+//			document.getElementById("twitterCityCurrentPage").value = 1;
+//			document.getElementById("twitterCityPage").innerHTML = 1;
+//			
+//			$("#twitterCity0").show();
+//			$("#twitterCity1").show();
+//			$("#twitterCity2").show();			
+//			
+//		}else{
+//			document.getElementById("twitterCityCurrentPage").value = 3;
+//			document.getElementById("twitterCityPage").innerHTML = 3;
+//			
+//			$("#twitterCity6").show();
+//			$("#twitterCity7").show();
+//			$("#twitterCity8").show();			
+//		}
+//		
+//	}else if(page == '3'){
+//		
+//		$("#twitterCity6").hide();
+//		$("#twitterCity7").hide();
+//		$("#twitterCity8").hide();		
+//		
+//		if(cmd == 'before'){
+//			document.getElementById("twitterCityCurrentPage").value = 2;
+//			document.getElementById("twitterCityPage").innerHTML = 2;
+//			
+//			$("#twitterCity3").show();
+//			$("#twitterCity4").show();
+//			$("#twitterCity5").show();			
+//			
+//		}else{
+//			document.getElementById("twitterCityCurrentPage").value = 4;
+//			document.getElementById("twitterCityPage").innerHTML = 4;
+//			
+//			$("#twitterCity9").show();
+//			$("#twitterCity10").show();
+//			$("#twitterCity11").show();			
+//		}
+//		
+//	}else if(page == '4'){
+//		
+//		$("#twitterCity9").hide();
+//		$("#twitterCity10").hide();
+//		$("#twitterCity11").hide();		
+//		
+//		if(cmd == 'before'){
+//			document.getElementById("twitterCityCurrentPage").value = 3;
+//			document.getElementById("twitterCityPage").innerHTML = 3;
+//			
+//			$("#twitterCity6").show();
+//			$("#twitterCity7").show();
+//			$("#twitterCity8").show();			
+//			
+//			
+//		}else{
+//			document.getElementById("twitterCityCurrentPage").value = 5;
+//			document.getElementById("twitterCityPage").innerHTML = 5;
+//			
+//			$("#twitterCity12").show();
+//			$("#twitterCity13").show();
+//			$("#twitterCity14").show();			
+//		}
+//		
+//	}else if(page == '5'){
+//		
+//		$("#twitterCity12").hide();
+//		$("#twitterCity13").hide();
+//		$("#twitterCity14").hide();		
+//		
+//		if(cmd == 'before'){
+//			document.getElementById("twitterCityCurrentPage").value = 4;
+//			document.getElementById("twitterCityPage").innerHTML = 4;
+//			
+//			$("#twitterCity9").show();
+//			$("#twitterCity10").show();
+//			$("#twitterCity11").show();			
+//			
+//		}else{
+//			document.getElementById("twitterCityCurrentPage").value = 1;
+//			document.getElementById("twitterCityPage").innerHTML = 1;
+//			
+//			$("#twitterCity0").show();
+//			$("#twitterCity1").show();
+//			$("#twitterCity2").show();			
+//		}
+//		
+//	}
+//	
+//}
+
+
+function timeline(param){
+	var param = $(param);
+	var index = 0;
+
+	var token = "255355107991046|aeNehYd_dAjdkPlEIKYiznJginE";
+	var pname = "daejeonstory"; // 페이지 이름
+
+	var n = 5; // 출력 갯수
+	var str = "https://graph.facebook.com/"+pname+"/posts?access_token="+token+"&limit="+n+"&callback=?"; // graph API
+
+
+	param.scroll(function(){
+		if($(this).scrollTop() >= chak_h()) load_stream();
+	});
+
+	function chak_h(){
+		var z = 0;
+
+		$.each(param.find("li"),function(e){
+			z += $(this).outerHeight()-1;
+		});
+
+		return z-param.height();
+	}
+var successChk = false;
+	function load_stream(){
+		$.getJSON(str,function(data){
+			successChk=true;
+			var item = data.data;
+			//alert(item);
+			$.each(item,function(e){
+					if(e < '2'){					
+//						var _profile_id = item[e].from.id;
+						var _profile_id = item[e].from.id;
+						var _name = item[e].from.name;
+						var _message = _message = item[e].message;
+						var _picture = item[e].picture;
+//						alert(typeof _picture);
+						if(typeof _picture=="undefined"){
+//							alert('come in');
+							_picture = 'http://www.daejeon.go.kr/images/common/no_img.jpg';
+						}
+						var _created_time = item[e].created_time.split("-");
+						var _year = _created_time[0];
+						var _month = _created_time[1];
+						var _day = _created_time[2].substr(0,2);
+						var _link = item[e].link;
+
+						if(_picture != undefined) _link = item[e].link;
+
+						var innerContent = "";
+						if(_message != undefined) innerContent = _message; else innerContent = '';
+						if(_message != undefined && _picture != undefined) innerContent = _message;
+						
+						
+						if(innerContent.length > 18){
+							innerContent = innerContent.substr(0,17)+"...";
+						}
+						
+//						var profile_img = '<img src="https://graph.facebook.com/'+_profile_id+'/picture" alt="">';
+						var profile_img = '<img style="max-width:220px; height:129px;" src="'+_picture+'" alt="이미지">';
+//						var description = '<dd class="id">'+_name+'</dd><dd class="text">'+innerContent+'</dd><dd class="timer">'+_year+'년 '+_month+'월 '+_day+'일</dd>';
+						var description = innerContent;
+						var date = _year+'년 '+_month+'월 '+_day+'일';
+						
+						if(_message != undefined || _picture != undefined){
+							if(_link != undefined){
+								param.append('<li><a target="_blank" href="'+_link+'" title="'+description+'">'+profile_img+'<h3 class="tit">'+description+'</h3><span class="date">'+date+'</span></a></li>');
+							}else{
+								param.append('<li><a target="_blank" href="https://www.facebook.com/daejeonstory/" title="'+description+'">'+profile_img+'<h3 class="tit">'+description+'</h3><span class="date">'+date+'</span></a></li>');
+//								param.append('<li class="message end">'+profile_img+'<a target="_blank" href="https://www.facebook.com/daejeonstory/"><dl class="message_con">'+description+'</dl></a></li>');
+							}
+						}
+					}
+				if(data.paging) str = data.paging.next + "&callback=?";
+			});
+		});
+		//loading fail function
+		if(successChk != true){
+			//param.append('<li><a target="_blank" href="https://www.facebook.com/daejeonstory/"><img style="max-width:220px; height:129px;" src="http://www.daejeon.go.kr/images/common/no_img.jpg" alt="이미지"><h3 class="tit">Daejeon FaceBook</h3><span class="date">not found</span></a></li>');
+			//param.append('<li><a target="_blank" href="https://www.facebook.com/daejeonstory/"><img style="max-width:220px; height:129px;" src="http://www.daejeon.go.kr/images/common/no_img.jpg" alt="이미지"><h3 class="tit">Daejeon FaceBook</h3><span class="date">not found</span></a></li>');
+		}
+	}
+	load_stream();
+}	
+
+function fn_twitterTimeline(){
+	 var twitterPrm = {
+
+	  api: 'https://api.twitter.com/1.1/statuses/user_timeline.json?include_entities=true&include_rts=true',
+	  count: 2, //불러올 타임라인 수
+	  callback: "fn_makedocTwitter",//함수를 호출하여JSON데이터를 넘겨줍니다.
+
+	//트위터개발자페이지에서 생성한 자신의 어플리케이션 정보를 입력하시기 바랍니다.
+	//  consumerKey: "5Uhiho4jsRxwg3XsW2HbnA",  
+	//  consumerSecret: "8W7nsqxKPUKcdnGZFA1xSPlV3QNX8sJndFO0qIhZQ",
+	//  accessToken: "1263760560-t7YiDv9J2wO9AhbX0YWwgDERWk6xnXLZnmAiZSR",
+	//  tokenSecret: "k4C88mRt74NPVNoWSH72Q6Yvr1ulvMVBVQKsmRmOT0"
+//	    consumerKey : "Mq9MpwAlXHbJeVpbThgg",
+//		consumerSecret : "8OWq9I9on64kle5JpqTyJoNLyqB4P1UKHGriR6SvzEo",
+//		accessToken : "226461081-B15a4abHfDasH3qzcAvV13FX5oALkz6iLfy5xYqd",
+//		tokenSecret : "tH1PPhzVAfxwMYMxoOBKCqZmb0KWJSky0wRoGF7frcdPo"
+		consumerKey : "WI7SgDOIQ3nxJrAeYiLjbQ",
+		consumerSecret : "e8NhM7A0HS76HSYNH43VmK8Yo9NiTA0Px2NKaHPLk",
+		accessToken : "167286386-Dy03yXhENNgJXeOXnytRJcrkMwjAIUuTvUhXWz2k",
+		tokenSecret : "y0fAHK8sxJt19LcCzZCvipbAiA5o7gdo18oS0PQxQ"
+	 }
+
+	 var oauthMessage ={
+	   method: "GET",
+	   action: twitterPrm.api,
+	   parameters: {
+	    count: twitterPrm.count,
+	    callback: twitterPrm.callback,
+	    oauth_version: "1.0",
+	    oauth_signature_method: "HMAC-SHA1",
+	    oauth_consumer_key: twitterPrm.consumerKey,
+	    oauth_token: twitterPrm.accessToken
+	   }
+	  };
+
+	 //Outh인증관련
+	 OAuth.setTimestampAndNonce(oauthMessage);
+	 OAuth.SignatureMethod.sign(oauthMessage, {
+	  consumerSecret: twitterPrm.consumerSecret,
+	  tokenSecret: twitterPrm.tokenSecret
+	 });
+	 //Outh인증끝
+	 
+	 //Outh인증하여 URL리턴(jsonType)
+	 var twJsonPath = OAuth.addToURL(oauthMessage.action, oauthMessage.parameters);
+	 
+//	 alert(twJsonPath);
+	 $.ajax({
+	  type: oauthMessage.method,
+	  url: twJsonPath,
+	  dataType: "jsonp",
+	  jsonp: false,
+	  cache: true,
+	  error: function(request,status,error){
+//		  alert(request.status); //AJAX FAIL CHECK FUNCTION
+ 		 // var tLine = '';
+		//  tLine += '<li><a target="_blank" href="https://twitter.com/dreamdaejeon"><img style="max-width:220px; height:129px;" src="http://www.daejeon.go.kr/images/common/no_img.jpg" alt=""><h3 class="tit">Daejeon Twitter</h3><span class="date">not found</span></a></li>';
+		 // tLine += '<li><a target="_blank" href="https://twitter.com/dreamdaejeon"><img style="max-width:220px; height:129px;" src="http://www.daejeon.go.kr/images/common/no_img.jpg" alt=""><h3 class="tit">Daejeon Twitter</h3><span class="date">not found</span></a></li>';
+		//  $('#div_snstwitter').html(tLine);
+	  }
+	 });
+	} 
+
+	function fn_makedocTwitter(data){
+	 var timeLine='';
+	 var text;
+	 var dateObj;
+	 for(var i=0, len=data.length;i<len;i++){
+	 text = data[i].text;
+//	 alert(text);
+	 //이미지를 트위터 프로필사진밖에 못가져옴
+//	 image = data[i].user.profile_image_url;
+//	 var profile_img = '<img style="max-width:220px; height:129px;" src="'+image+'" alt="">';
+//	 alert(text);
+	 //미디어 
+//	 alert(media);
+//	 for(i in data[i]) {
+//		    console.log("no is " + [i]);
+//		}
+	 var media = 'http://www.daejeon.go.kr/images/common/no_img.jpg';
+//	 alert(typeof data[i].entities.media);
+	 if(typeof data[i].entities.media=='undefined'){
+//		 media = data[i].user.profile_image_url
+//		 media = 'http://www.daejeon.go.kr/images/common/no_img.jpg';
+	 }else{
+		 media  = data[i].entities.media[0].media_url;
+	 }
+	 
+//	 alert(media);
+	 var text2 ='https://twitter.com/dreamdaejeon';
+	 if(text.indexOf('https')>0){
+		 text2 = text.substr(text.lastIndexOf('https'));
+	 }
+//	 alert(text2);
+	 
+//	 alert(num);
+//	 alert(text2);
+//	 alert(data[i].user.profile_image_url);
+//	 alert(data[i].user.url);
+//	 alert(data[i].urls);
+	 //URL링크
+//	 text = text.replace(/(https?:\/\/[\S]+)/gi,'<a href="$1">$1</a>');
+	 //문자자르기
+	 if(text.length > 25){
+		 text = text.substr(0,25)+"...";
+		}
+
+	var profile_img = '<img style="max-width:220px; height:129px;" src="'+media+'" alt="'+text+'">';
+	 //날짜형식변경
+	var chagedDate = '';
+	var dt = new Date((data[i].created_at));
+//	alert(dt);
+	chagedDate = new Date(Date.parse(data[i].created_at.replace(/( \+)/, ' UTC$1')));
+//	alert(chagedDate);
+	var UtcDate = chagedDate+'';
+	var createDate  = UtcDate.split(' ');
+	var resultDateYear = ''+createDate[3];
+	var resultDateMon = '00';
+	if(''+createDate[1]=='Jan'){
+		resultDateMon = '01';
+	}else if(''+createDate[1]=='Feb'){
+		resultDateMon = '02';
+	}else if(''+createDate[1]=='Mar'){
+		resultDateMon = '03';
+	}else if(''+createDate[1]=='Apr'){
+		resultDateMon = '04';
+	}else if(''+createDate[1]=='May'){
+		resultDateMon = '05';
+	}else if(''+createDate[1]=='Jun'){
+		resultDateMon = '06';
+	}else if(''+createDate[1]=='Jul'){
+		resultDateMon = '07';
+	}else if(''+createDate[1]=='Aug'){
+		resultDateMon = '08';
+	}else if(''+createDate[1]=='Sep'){
+		resultDateMon = '09';
+	}else if(''+createDate[1]=='Oct'){
+		resultDateMon = '10';
+	}else if(''+createDate[1]=='Nov'){
+		resultDateMon = '11';
+	}else if(''+createDate[1]=='Dec'){
+		resultDateMon = '12';
+	}
+	var resultDateDay = ''+createDate[2];
+//	alert(resultDateYear+'#'+resultDateMon+'@'+resultDateDay+'%');
+	//아이폰체크
+	if(resultDateYear == 'undefined'){
+		var ddd = data[i].created_at;
+		var dtt2 = new Date(Date.parse(ddd.replace(/( +)/,' UTC$1')));
+//		alert(dtt2);
+		var UtcDate2 = dtt2+'';
+		var createDate2  = UtcDate2.split(' ');
+		var resultDateYear2 = ''+createDate2[3];
+		var resultDateMon2 = '00';
+		if(''+createDate2[1]=='Jan'){
+			resultDateMon2 = '01';
+		}else if(''+createDate2[1]=='Feb'){
+			resultDateMon2 = '02';
+		}else if(''+createDate2[1]=='Mar'){
+			resultDateMon2 = '03';
+		}else if(''+createDate2[1]=='Apr'){
+			resultDateMon2 = '04';
+		}else if(''+createDate2[1]=='May'){
+			resultDateMon2 = '05';
+		}else if(''+createDate2[1]=='Jun'){
+			resultDateMon2 = '06';
+		}else if(''+createDate2[1]=='Jul'){
+			resultDateMon2 = '07';
+		}else if(''+createDate2[1]=='Aug'){
+			resultDateMon2 = '08';
+		}else if(''+createDate2[1]=='Sep'){
+			resultDateMon2 = '09';
+		}else if(''+createDate2[1]=='Oct'){
+			resultDateMon2 = '10';
+		}else if(''+createDate2[1]=='Nov'){
+			resultDateMon2 = '11';
+		}else if(''+createDate2[1]=='Dec'){
+			resultDateMon2 = '12';
+		}
+		var resultDateDay2 = ''+createDate2[2];
+		chagedDate = resultDateYear2 + '년 ' + resultDateMon2 + '월 ' + resultDateDay2 + '일';
+		
+	}else{
+		chagedDate = resultDateYear + '년 ' + resultDateMon + '월 ' + resultDateDay + '일';
+	}
+	
+//	chagedDate = '' + chagedDate.getFullYear() + '년' + ("0" + (chagedDate.getMonth() + 1)).slice(-2) + '월' + chagedDate.getDate() + '일' + chagedDate.getHours() + ':' + chagedDate.getMinutes() + ':' + chagedDate.getSeconds() ;
+
+	 //헤시테그연결
+//	 text = text.replace(/#(\w+)/gi,'<a href="http://twitter.com/search?q=%23$1">#$1</a>');
+
+	 //멘션연결
+//	 text = text.replace(/@(\w+)/gi,'<a href="http://twitter.com/$1">@$1</a>');
+//	 timeLine += "<p>"+data[i].created_at+":"+text+"</p>";
+//	 timeLine += '<li><a target="_blank" href="'+text2+'">'+profile_img+'<h3 class="tit">'+text+'</h3><span class="date">'+data[i].created_at+'</span></a></li>';
+	 timeLine += '<li><a target="_blank" href="'+text2+'" title="'+text+'">'+profile_img+'<h3 class="tit">'+text+'</h3><span class="date">'+chagedDate+'</span></a></li>';
+	 }
+	 $('#div_snstwitter').html(timeLine);
+	}
+
+	function fn_SnsClick(e){
+//		alert(e.text);
+		if(e.text == '블로그' || e.text == ''){
+			$("#blogData").css("display","block");
+			$("#facebook_timeline").css("display","none");
+			$("#div_snstwitter").css("display","none");
+			$("#snsMore").attr("href","http://daejeon-story.tistory.com/");
+			
+			// 20170406 SNS아이콘 유지 요청으로 추가
+			$("ul.listSns>li:eq(0) a").css("background-position-y", "-36px");
+			$("ul.listSns>li:eq(1) a").css("background-position-y", "0px");
+			$("ul.listSns>li:eq(2) a").css("background-position-y", "0px");
+		}else if(e.text == '페이스북'){
+			$("#blogData").css("display","none");
+			$("#facebook_timeline").css("display","block");
+			$("#div_snstwitter").css("display","none");
+			$("#snsMore").attr("href","https://www.facebook.com/daejeonstory");
+			
+			// 20170406 SNS아이콘 유지 요청으로 추가
+			$("ul.listSns>li:eq(0) a").css("background-position-y", "0px");
+			$("ul.listSns>li:eq(1) a").css("background-position-y", "-36px");
+			$("ul.listSns>li:eq(2) a").css("background-position-y", "0px");
+		}else if(e.text == '트위터'){
+			$("#blogData").css("display","none");
+			$("#facebook_timeline").css("display","none");
+			$("#div_snstwitter").css("display","block");
+			$("#snsMore").attr("href","https://twitter.com/dreamdaejeon");
+			
+			// 20170406 SNS아이콘 유지 요청으로 추가
+			$("ul.listSns>li:eq(0) a").css("background-position-y", "0px");
+			$("ul.listSns>li:eq(1) a").css("background-position-y", "0px");
+			$("ul.listSns>li:eq(2) a").css("background-position-y", "-36px");
+		}
+		return false;
+	}
+
+// 열린시장실 페이스북
+function mayorFacebook(param){
+	var param = $(param);
+	var index = 0;
+
+	var client_secret = "1760458087380750";
+	var access_token = "188468961996813|-o3j_oicOk66Z65KqFyHyeUBMxg";
+	var loadCount = 3; // 출력 갯수
+	var addr = "https://graph.facebook.com/v3.0/"+client_secret+"/feed?fields=picture,link,message,created_time&limit="+loadCount+"&access_token="+access_token; // graph API
+
+	function load_stream(){
+		$.getJSON(addr,function(data){
+			var item = data.data;
+
+			$.each(item,function(i){
+				var _url = item[i].link;
+				var _img_url = item[i].picture;
+				var _cont = item[i].message;
+				var _reg_dt = item[i].created_time; // "2018-06-12T10:03:47+0000"
+
+				if(_url == undefined){
+					_url = "https://www.facebook.com/her.teajeong";
+				}
+
+				if(_img_url == undefined){
+					_img_url = 'http://www.daejeon.go.kr/images/mayor/contents/no_img.jpg';
+				}
+
+				var content = "";
+				if(_cont != undefined){
+					content = _cont;
+				}
+				if(content.length > 40){
+					content = content.substr(0, 40)+"..";
+				}
+
+				if(_reg_dt != undefined){
+					var str = _reg_dt;
+					_reg_dt = str.substring(0, 10);
+				}
+
+				var html = "";
+				html += '<li><a href="'+_url+'" target="_blank" title="새창으로 이동">';
+				html += '<img src="'+_img_url+'" alt="'+content+'">';
+				html += '<p>'+content+'</p>';
+				html += '<span>'+_reg_dt+'</span>';
+				html += '</a></li>';
+
+				param.append(html);
+			});
+		});
+	}
+	load_stream();
+}
+
+// 열린시장실 인스타그램
+function mayorInstagram(param){
+	var param = $(param);
+	var index = 0;
+
+	var access_token = "7011664714.cabe5e5.dea51fb19e53424c98df47925f6fbca4";
+	var loadCount = 3; // 출력 갯수
+	var addr = "https://api.instagram.com/v1/users/self/media/recent?count="+loadCount+"&access_token="+access_token; // instagram API
+
+	function load_stream(){
+		$.getJSON(addr,function(data){
+			var item = data.data;
+
+			$.each(item,function(i){
+				var _url = item[i].link;
+				var _img_url = item[i].images.low_resolution.url;
+				var _cont = item[i].caption.text;
+				var _reg_dt = item[i].created_time;
+
+				if(_url == undefined){
+					_url = "https://www.instagram.com/her.teajeong";
+				}
+
+				var content = "";
+				if(_cont != undefined){
+					content = _cont;
+				}
+				if(content.length > 40){
+					content = content.substr(0, 40)+"..";
+				}
+
+				if(_reg_dt != undefined){
+					var dt = new Date(_reg_dt*1000).toISOString(); // UNIX 시간표기 변환
+					_reg_dt = dt.substring(0, 10);
+				}
+
+				var html = "";
+				html += '<li><a href="'+_url+'" target="_blank" title="새창으로 이동">';
+				html += '<img src="'+_img_url+'" alt="'+content+'">';
+				html += '<p>'+content+'</p>';
+				html += '<span>'+_reg_dt+'</span>';
+				html += '</a></li>';
+
+				param.append(html);
+			});
+		});
+	}
+	load_stream();
+}

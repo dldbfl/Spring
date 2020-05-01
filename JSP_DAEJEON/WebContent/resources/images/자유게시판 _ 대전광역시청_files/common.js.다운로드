@@ -1,0 +1,318 @@
+/**** jquery cycle로 변경 2014.09.13 *******************************************************
+
+var gnb_intervalID = 0;
+var gnb_intervalNum = 5000;
+var gnb_isPlayNext  = true;
+var gnb_isMovePlay  = false;
+var gnb_isStopEvent = false;
+
+function fadeStart() {
+//	debugger;
+	if( $('.gnb_container a').size() > 1 )
+	{
+		if(gnb_isPlayNext) {
+		$(".gnb_container a:last").fadeOut("fast",function() {
+			$(this).prependTo( $(".gnb_container") );
+			$(".gnb_container a:first").css("display", "inline");
+		});
+	} else {
+		$(".gnb_container a:first").css("display", "none");
+		$(".gnb_container a:first").appendTo( $(".gnb_container") );
+		$(".gnb_container a:last").fadeIn("fast");
+	}
+	}
+}
+***************************************************************************/	
+
+var banner_intervalID = 0;
+var banner_intervalNum = 3000;
+var banner_isPlayNext  = true;
+var banner_isMovePlay  = false;
+var banner_isStopEvent = false;
+
+function banner_fadeStart() {
+	if (banner_isPlayNext) {
+		$(".banner_container li:last").fadeOut("fast",function() {
+			$(this).prependTo( $(".banner_container") );
+			$(".banner_container li:first").css("display", "block");
+		});
+	} else {
+		$(".banner_container li:first").css("display", "none");
+		$(".banner_container li:first").appendTo( $(".banner_container") );
+		$(".banner_container li:last").fadeIn("fast");
+	}
+}
+
+$(window).load(function() {
+	// scrollTop 위치 고정
+	setTimeout(function(){if(window.pageYOffset==0) window.scrollTo(0,1);},100);
+
+/**** jquery cycle로 변경 2014.09.13 *******************************************************
+	// 상단 배너 EventHandler
+	gnb_intervalID = setInterval(fadeStart, gnb_intervalNum);
+	
+	$(".gnb_controll .gprev").click(function(event){
+		$(".gnb_container a:first").css("display", "none");
+		$(".gnb_container a:first").appendTo( $(".gnb_container") );
+		$(".gnb_container a:last").fadeIn("fast");
+		
+		gnb_isPlayNext = false;
+		gnb_isMovePlay = true;
+
+		event.preventDefault();
+	}).mouseenter(function() {
+		clearInterval(gnb_intervalID);
+	}).mouseleave(function() {
+		if (gnb_isMovePlay) {
+			gnb_intervalID = setInterval(fadeStart, gnb_intervalNum);
+		}	
+	});
+	$(".gnb_controll .gstop").click(function(event){
+		clearInterval(gnb_intervalID);
+		gnb_isMovePlay = false;
+
+		event.preventDefault();
+	}).mouseenter(function() {
+		clearInterval(gnb_intervalID);
+	}).mouseleave(function() {
+		if (gnb_isMovePlay) {
+			gnb_intervalID = setInterval(fadeStart, gnb_intervalNum);
+		}	
+	});
+	$(".gnb_controll .gnext").click(function(event){
+		
+		$(".gnb_container a:last").fadeOut("fast",function() {
+			$(this).prependTo( $(".gnb_container") );
+			$(".gnb_container a:first").css("display", "block");
+		});
+		
+		gnb_isPlayNext = true;
+		gnb_isMovePlay = true;
+
+		event.preventDefault();
+	}).mouseenter(function() {
+		clearInterval(gnb_intervalID);
+	}).mouseleave(function() {
+		if (gnb_isMovePlay) {
+			gnb_intervalID = setInterval(fadeStart, gnb_intervalNum);
+		}	
+	});	
+***************************************************************************/	
+	//헤더배너 정지 버튼
+	var flag_stop = false;
+	$('#gnb_stop').click(function() {
+		if( !flag_stop ){
+			flag_stop = true;
+//			$(this).css('background-position','-28px -26px');
+//			$(this).attr("alt","시작");
+			$('.gnb_container').cycle('pause');
+		}else{
+			flag_stop = false;
+//			$(this).css('background-position','-28px -26px');
+//			$(this).attr("alt","정지");
+			$('.gnb_container').cycle('resume');
+		}
+		return false;
+	});
+		
+	// 메인 메뉴
+	$(".gnb_menu_ul > li > a").mouseenter(function(event) {
+		if ( $("#lightbox").css("display")  != undefined ) {
+			$(".gnb_menu_ul > li > div").css("display", "none");
+		} else {
+			var lightbox = '<div id="lightbox"></div>';
+			$("body").append(lightbox);
+		}			
+
+		$(this).next().css("display", "block");
+		$(".gnb_menu_ul > li > a").removeClass("on");
+		$(this).addClass("on");
+
+		event.preventDefault();	
+	}).focus(function(){
+		$(this).trigger("click");
+	});
+	
+	$(".gnb_menu_ul > li > a").focus(function(event) {
+		if ( $("#lightbox").css("display")  != undefined ) {
+			$(".gnb_menu_ul > li > div").css("display", "none");
+		} else {
+			var lightbox = '<div id="lightbox"></div>';
+			$("body").append(lightbox);
+		}			
+
+		$(this).next().css("display", "block");
+		$(".gnb_menu_ul > li > a").removeClass("on");
+		$(this).addClass("on");
+
+		event.preventDefault();	
+	}).focus(function(){
+		$(this).trigger("click");
+	});
+	
+	$(".gnb_menu_ul").mouseleave(function() {
+		$(".gnb_menu_ul > li > div").css("display", "none");
+		$(".gnb_menu_ul > li > a").removeClass("on");
+		$("#lightbox").unbind("mouseenter");
+		$('#lightbox').remove();
+	});
+	
+	var nav = $(".gnb_menu_ul");
+	var navA = nav.find("a");	
+	
+	$("*").not(navA).focus(function() {
+		$(".gnb_menu_ul > li > div").css("display", "none");
+		$(".gnb_menu_ul > li > a").removeClass("on");
+		$("#lightbox").unbind("mouseenter");
+		$('#lightbox').remove();
+	});
+		
+	// 하단 배너 EventHandler
+	banner_intervalID = setInterval(banner_fadeStart, banner_intervalNum);
+	
+	$(".banner_controll .prev").click(function(event){
+		$(".banner_container li:first").css("display", "none");
+		$(".banner_container li:first").appendTo( $(".banner_container") );
+		$(".banner_container li:last").fadeIn("fast");
+		
+		banner_isPlayNext = false;
+		banner_isMovePlay = true;
+
+		event.preventDefault();	
+	}).mouseenter(function() {
+		clearInterval(banner_intervalID);
+	}).mouseleave(function() {
+		if (banner_isMovePlay) {
+			banner_intervalID = setInterval(banner_fadeStart, banner_intervalNum);
+		}	
+	});
+	$(".banner_controll .stop").click(function(event){
+		clearInterval(banner_intervalID);
+		banner_isMovePlay = false;
+		
+		event.preventDefault();	
+	}).mouseenter(function() {
+		clearInterval(banner_intervalID);
+	}).mouseleave(function() {
+		if (banner_isMovePlay) {
+			banner_intervalID = setInterval(banner_fadeStart, banner_intervalNum);
+		}	
+	});
+	$(".banner_controll .next").click(function(event){
+		
+		$(".banner_container li:last").fadeOut("fast",function() {
+			$(this).prependTo( $(".banner_container") );
+			$(".banner_container li:first").css("display", "block");
+		})
+		
+		banner_isPlayNext = true;
+		banner_isMovePlay = true;
+		
+		event.preventDefault();	
+		
+	}).mouseenter(function() {
+		clearInterval(banner_intervalID);
+	}).mouseleave(function() {
+		if (banner_isMovePlay) {
+			banner_intervalID = setInterval(banner_fadeStart, banner_intervalNum);
+		}	
+	});
+		
+		
+	// skiptoContent EventHandler
+	$("#skiptoContent a").focus(
+		function(event) {
+			$(this).css("position", "relative");
+			$(this).css("top", "0px");
+			$(this).css("padding", "10px");
+			$(this).css("height", "auto");
+			$(this).css("color", "#fff");
+
+			event.preventDefault();
+		}
+	);
+	$("#skiptoContent a").blur(
+		function(event) {
+			$(this).css("position", "absolute");
+			$(this).css("display", "block");
+			$(this).css("top", "-1000px");
+
+			event.preventDefault();
+		}
+	);
+});
+
+////////////////////////////////////////////////////////////
+// 정보공개 디렉토리 게시판 스크립트 2014.02.04
+function directory_AC(){
+	
+	var obj = $(".directory");
+	var ul = obj.find("ul>li>ul>li ul");
+	var li = obj.find(">ul>li");
+	var btn_open = '<a href="#" class="directory_action open">열기</a>';
+	var btn_close = '<a href="#" class="directory_action close">닫기</a>';
+
+	$(btn_open).insertBefore(obj.find(" .folder"));
+	ul.hide();//하위 그룹닫기
+	directory_recursive(li); //각 리스트의 마지막요소의 class:last요소 추가
+
+
+	var li_open = $(".directory_action");
+	
+
+	li_open.click(function(){
+		var ul = $(this).siblings("ul");
+		var folder = $(this).siblings("a.folder");
+		if(ul.size() != 0){
+			var ch = ul.is(":hidden");
+			if(ch){
+				//열기
+				ul.show(200); //형제 ul보이기
+				folder.removeClass("close").addClass("open");//클래스교체
+				$(this).removeClass("open").addClass("close"); //클래스교체
+			} else {
+				//닫기
+				ul.hide(200); //형제 ul보이기
+				folder.removeClass("open").addClass("close");//클래스교체
+				$(this).removeClass("close").addClass("open"); //클래스교체
+			}
+		} else {
+			alert("빈 폴더입니다.");
+		}
+		return false;
+	});
+
+}
+function directory_recursive(str){
+	
+	str.parent().find(">li:last").addClass("last");
+	if(str.find(">ul").size() != 0){
+		var li = str.find(">ul>li");
+		directory_recursive(li);
+	} else {
+		return false;
+	}
+	
+}
+////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////
+// 서브메인 미니 게시판 스크립트 2014.02.05
+function mini_board_AC(){
+	var obj = $(".mini_board");
+	var bt = obj.find(">strong>a");
+	var box = obj.find(">ul");
+	
+	box.hide().eq(0).show();
+
+	bt.focus(function(){
+		var idx = bt.index($(this));
+		box.hide().eq(idx).show();
+
+		bt.removeClass("on");
+		$(this).addClass("on");
+		return false;
+	});
+}
+////////////////////////////////////////////////////////////

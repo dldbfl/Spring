@@ -1,0 +1,263 @@
+function fn_twitter(){
+	
+	var twitterPrm = {
+			api : 'https://api.twitter.com/1.1/statuses/user_timeline.json',
+			count : 15,
+			callback : "fn_makeTwitter",
+			userId : 'yumone2010',
+			
+			consumerKey : "Mq9MpwAlXHbJeVpbThgg",
+			consumerSecret : "8OWq9I9on64kle5JpqTyJoNLyqB4P1UKHGriR6SvzEo",
+			accessToken : "226461081-B15a4abHfDasH3qzcAvV13FX5oALkz6iLfy5xYqd",
+			tokenSecret : "tH1PPhzVAfxwMYMxoOBKCqZmb0KWJSky0wRoGF7frcdPo"
+	}
+	
+	var oauthMessage = {
+			method : "GET",
+			action : twitterPrm.api,
+			parameters : {
+				count : twitterPrm.count,
+				screen_name : twitterPrm.userId,
+				callback : twitterPrm.callback,
+				oauth_version : "1.0",
+				oauth_signature_method : "HMAC-SHA1",
+				oauth_consumer_key : twitterPrm.consumerKey,
+				oauth_token : twitterPrm.accessToken
+			}
+	};
+	
+	OAuth.setTimestampAndNonce(oauthMessage);
+	OAuth.SignatureMethod.sign(oauthMessage,{
+		consumerSecret : twitterPrm.consumerSecret,
+		tokenSecret : twitterPrm.tokenSecret
+	});
+	
+	var twJsonPath = OAuth.addToURL(oauthMessage.action, oauthMessage.parameters);
+	
+	$.ajax({
+		type : oauthMessage.method,
+		url : twJsonPath,
+		dataType : "jsonp",
+		jsonp : false,
+		cache : true
+	});
+}
+
+function fn_makeTwitter(data){
+	var timeLine = '';
+	var text;
+	var url;
+	var replyUrl;
+	var writeDate;	
+	
+	timeLine += "<ul class='twitter_update_list' id='twitter_update_list_yumone2010' style='display: block; height: 1349px;'>";
+	
+	for(var i=0, len=data.length; i<len; i++){
+		
+		text = data[i].text;
+		writeDate = data[i].created_at;
+		url = 'https://twitter.com/yumone2010/status/'+data[i].id_str;
+		replyUrl = 'http://twitter.com/?status=@yumone2010%20&in_reply_to_status_id='+data[i].id_str+'&in_reply_to=yumone2010'
+		
+		
+		
+		text = text.replace(/(s?https?:\/\/[-_.!~*'()a-zA-Z0-9;\/:@&=+$,%#]+)/gi,'<a href="$1">$1</a>');
+		text = text.replace(/#(\w+)/gi,'<a href="http://twitter.com/search?q=%23$1">#$1</a>');
+		text = text.replace(/#(\w+)/gi,'<a href="http://twitter.com/$1">@$1</a>');	
+		
+		if(text.length > 20){
+			text = text.substring(0,20) + '...';	
+		}	
+		
+		
+		
+		
+		
+		if(i > 3){
+			timeLine += "<li id='twitter"+i+"' style='display:none'><span class='tw_top'><strong>염홍철</strong>yumone2010</span><span class='twt_content'>"+text+"</span> <span class=\'tw_timeline\'><a class='twt_time' href="+url+" target='_blank'>"+relative_time(data[i].created_at)+"</a> <span class='twt_slash'>/</span> <a class='twt_reply' href="+replyUrl+" target='_blank'>reply</a><span></li>";		
+			             
+		}else{
+			timeLine += "<li id='twitter"+i+"'><span class='tw_top'><strong>염홍철</strong>yumone2010</span><span class='twt_content'>"+text+"</span> <span class=\'tw_timeline\'><a class='twt_time' href="+url+" target='_blank'>"+relative_time(data[i].created_at)+"</a> <span class='twt_slash'>/</span> <a class='twt_reply' href="+replyUrl+" target='_blank'>reply</a><span></li>";					     
+		}
+		
+																	   
+																	 
+	
+		//timeLine += "<li>"+text+"</li>"+relative_time(data[i].created_at)+"</ br>";
+		//timeLine += "<li>"+text+"</li></ br>";
+	}
+	timeLine += "</ul>";
+	
+	$('#twitter_yumone2010').html(timeLine);
+}
+
+function relative_time(time_value) {	
+	var values = time_value.split(" "); 	
+	time_value1 = values[0] + ", " + values[2] + " " + values[1] + " " + values[5] + " " + values[3] + " GMT";		
+	var parsed_date = Date.parse(time_value1);
+	var relative_to = (arguments.length > 1) ? arguments[1] : new Date(); 
+	var delta = parseInt((relative_to.getTime() - parsed_date) / 1000); 
+	if (delta < 60) { 
+		return '약 몇분전'; 
+	} else if(delta < (45*60)) { 
+		return (parseInt(delta / 60)).toString() + ' 분전'; 
+	} else if(delta < (90*60)) { 
+		return '약 한시간전'; 
+	} else if(delta < (24*60*60)) { 
+		return '약 ' + parseInt(delta / 3600).toString() + ' 시간전'; 
+	} else if(delta < (48*60*60)) { 
+		return '1 일전'; 
+	} else { 
+		return parseInt(delta / 86400).toString() + ' 일전'; 
+	} 
+	
+	
+//	var values = time_value.split(" "); 
+//	time_value = values[1] + " " + values[2] + ", " + values[4] + " " + values[3];
+//	alert(time_value);
+//	var parsed_date = Date.parse(time_value); 
+//	alert(parsed_date);
+//	var relative_to = (arguments.length > 1) ? arguments[1] : new Date(); 
+//	var delta = parseInt((relative_to.getTime() - parsed_date) / 1000); 
+//	if (delta < 60) { 
+//		return '약 몇분전'; 
+//	} else if(delta < (45*60)) { 
+//		return (parseInt(delta / 60)).toString() + ' 분전'; 
+//	} else if(delta < (90*60)) { 
+//		return '약 한시간전'; 
+//	} else if(delta < (24*60*60)) { 
+//		return '약 ' + parseInt(delta / 3600).toString() + ' 시간전'; 
+//	} else if(delta < (48*60*60)) { 
+//		return '1 일전'; 
+//	} else { 
+//		return parseInt(delta / 86400).toString() + ' 일전'; 
+//	} 
+}
+
+
+function fn_twitterPage(cmd){
+	
+	var page = document.getElementById("twitterCurrentPage").value;
+	
+	
+	
+	if(page == '1'){
+			
+		$("#twitter0").hide();
+		$("#twitter1").hide();
+		$("#twitter2").hide();		
+		
+		if(cmd == 'before'){
+			document.getElementById("twitterCurrentPage").value = 5;
+			document.getElementById("twitterPage").innerHTML = 5;
+			
+			$("#twitter12").show();
+			$("#twitter13").show();
+			$("#twitter14").show();			
+			
+		}else{
+			document.getElementById("twitterCurrentPage").value = 2;
+			document.getElementById("twitterPage").innerHTML = 2;
+			
+			$("#twitter3").show();
+			$("#twitter4").show();
+			$("#twitter5").show();			
+			
+		}		
+		
+	}else if(page == '2'){
+		
+		$("#twitter3").hide();
+		$("#twitter4").hide();
+		$("#twitter5").hide();		
+		
+		if(cmd == 'before'){
+			document.getElementById("twitterCurrentPage").value = 1;
+			document.getElementById("twitterPage").innerHTML = 1;
+			
+			$("#twitter0").show();
+			$("#twitter1").show();
+			$("#twitter2").show();			
+			
+		}else{
+			document.getElementById("twitterCurrentPage").value = 3;
+			document.getElementById("twitterPage").innerHTML = 3;
+			
+			$("#twitter6").show();
+			$("#twitter7").show();
+			$("#twitter8").show();			
+		}
+		
+	}else if(page == '3'){
+		
+		$("#twitter6").hide();
+		$("#twitter7").hide();
+		$("#twitter8").hide();		
+		
+		if(cmd == 'before'){
+			document.getElementById("twitterCurrentPage").value = 2;
+			document.getElementById("twitterPage").innerHTML = 2;
+			
+			$("#twitter3").show();
+			$("#twitter4").show();
+			$("#twitter5").show();			
+			
+		}else{
+			document.getElementById("twitterCurrentPage").value = 4;
+			document.getElementById("twitterPage").innerHTML = 4;
+			
+			$("#twitter9").show();
+			$("#twitter10").show();
+			$("#twitter11").show();			
+		}
+		
+	}else if(page == '4'){
+		
+		$("#twitter9").hide();
+		$("#twitter10").hide();
+		$("#twitter11").hide();		
+		
+		if(cmd == 'before'){
+			document.getElementById("twitterCurrentPage").value = 3;
+			document.getElementById("twitterPage").innerHTML = 3;
+			
+			$("#twitter6").show();
+			$("#twitter7").show();
+			$("#twitter8").show();			
+			
+			
+		}else{
+			document.getElementById("twitterCurrentPage").value = 5;
+			document.getElementById("twitterPage").innerHTML = 5;
+			
+			$("#twitter12").show();
+			$("#twitter13").show();
+			$("#twitter14").show();			
+		}
+		
+	}else if(page == '5'){
+		
+		$("#twitter12").hide();
+		$("#twitter13").hide();
+		$("#twitter14").hide();		
+		
+		if(cmd == 'before'){
+			document.getElementById("twitterCurrentPage").value = 4;
+			document.getElementById("twitterPage").innerHTML = 4;
+			
+			$("#twitter9").show();
+			$("#twitter10").show();
+			$("#twitter11").show();			
+			
+		}else{
+			document.getElementById("twitterCurrentPage").value = 1;
+			document.getElementById("twitterPage").innerHTML = 1;
+			
+			$("#twitter0").show();
+			$("#twitter1").show();
+			$("#twitter2").show();			
+		}
+		
+	}
+	
+}

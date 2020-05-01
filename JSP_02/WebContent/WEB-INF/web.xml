@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+	
+	<context-param>
+		<param-name>child</param-name>
+		<param-value>com.jsp.test.ChildImpl03</param-value>
+	</context-param>	
+	
+	<listener>
+		<listen-class>com.jsp.test.InitListener</listen-class>
+	</listener> 
+
+	
+
+	<error-page>
+		<error-code>500</error-code>	
+		<location>/error/500_error.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>404</error-code>	
+		<location>/error/404_error.jsp</location>
+	</error-page>
+</web-app>
