@@ -19,7 +19,7 @@ public class GetImgAction implements Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String url = null;
-
+		System.out.println(request.getParameter("fileName"));
 		// 파일명
 		String fileName = request.getParameter("fileName");
 

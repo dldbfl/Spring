@@ -30,9 +30,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/cityrayout.css">	
 <decorator:head/>
+<style>
+
+	
+</style>
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -57,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Brand Logo -->
     
       <img src="<%=request.getContextPath()%>/resources/images/lefttop.png" 
-           style="opacity: .">
+           style="opacity: .;width:250px; height:auto;">
       
 
     <!-- Sidebar -->

@@ -955,7 +955,7 @@ body {
 .footer {
 	clear: both;
 	position: relative;
-	min-height: 170px;
+	min-height: 120px;
 	font-size: 14px;
 	letter-spacing: -0.01em;
 	background: #3b414d;

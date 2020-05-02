@@ -1,6 +1,7 @@
 package com.jsp.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import com.jsp.request.PageMaker;
 import com.jsp.request.SearchCriteria;
 import com.jsp.dao.AttachDAO;
 import com.jsp.dao.BoardDAO;
+import com.jsp.dao.ReplyDAO;
 import com.jsp.dto.AttachVO;
 import com.jsp.dto.BoardVO;
 
@@ -25,6 +27,11 @@ public class BoardServiceImpl implements BoardService {
 		this.attachDAO=attachDAO;
 	}
 	
+	private ReplyDAO replyDAO;
+	public void setReplyDAO(ReplyDAO replyDAO) {
+		this.replyDAO = replyDAO;
+	}
+	
 	@Override
 	public Map<String, Object> getList(SearchCriteria cri) throws SQLException {
 		
@@ -34,10 +41,49 @@ public class BoardServiceImpl implements BoardService {
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(boardDAO.selectBoardCriteriaTotalCount(cri));
 		
+		List<AttachVO> attachList = new ArrayList<>();
+		
+		
+		for(int i=0; i<boardList.size(); i++) {
+			
+			//근데 밑에껄 이해하면 위에꺼가 왜 작동하는지 모르겠어.
+			int bno = boardList.get(i).getBno();
+			System.out.println("bno : " + bno);
+			attachList = attachDAO.selectAttachesByBno(bno);
+			System.out.println("attachList : " + attachList);
+			boardList.get(i).setAttachList(attachList);
+			
+			//얘는 가동하지 않아. 하지만 안되는 이유는 대충알거같아.
+			/*attachList.clear();
+			int bno = boardList.get(i).getBno();
+			System.out.println("bno : " + bno);
+			attachList.addAll(attachDAO.selectAttachesByBno(boardList.get(i).getBno()));
+			System.out.println("attachList : " + attachList);
+			boardList.get(i).setAttachList(attachList);*/
+			
+			
+			/*System.out.println("boardList : "+boardList.get(i));
+			System.out.println("boardList.get("+i+").getAttachList(): "+boardList.get(i).getAttachList());*/
+			
+			}
+	
+		//댓글 갯수넣기
+		for(BoardVO board : boardList) {
+			int replycnt=replyDAO.countReply(board.getBno());
+			board.setReplycnt(replycnt);
+		}		
+		
+		
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("boardList", boardList);
 		dataMap.put("pageMaker", pageMaker);
 		
+		/*for(int i=0; i<boardList.size(); i++) {
+			
+			System.out.println("넣고나서 boardList : "+boardList.get(i));
+			System.out.println("넣고나서 boardList.get("+i+").getAttachList(): "+boardList.get(i).getAttachList());
+
+		}*/
 		return dataMap;
 	}
 	@Override

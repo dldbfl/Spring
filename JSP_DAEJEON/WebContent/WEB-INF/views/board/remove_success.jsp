@@ -4,6 +4,5 @@
 
 <script>
 	alert("삭제가 성공하였습니다.");
-	window.close();
-	opener.parent.searchList_go(${pageMaker.cri.page},"<%=request.getContextPath()%>/board/list.do");
+	window.location.href="list.do?page=1&perPageNum=10";
 </script>

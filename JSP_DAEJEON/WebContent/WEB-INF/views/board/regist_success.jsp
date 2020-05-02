@@ -4,8 +4,7 @@
 
 <script>
 	alert("자료 등록에 성공했소!")
-	window.close();
-	window.opener.location.href="list.do?page=1&perPageNum=10";		
+	window.location.href="list.do?page=1&perPageNum=10";		
 </script>
 
 

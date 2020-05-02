@@ -23,8 +23,8 @@
 	});
 	
 	$("#listBtn").on("click", function(){
-		window.opener.location.reload(true);
-		window.close();
+		window.location.reload(true);
+		window.location.href="list.do?page=1&perPageNum=10";
 	});
 	
 

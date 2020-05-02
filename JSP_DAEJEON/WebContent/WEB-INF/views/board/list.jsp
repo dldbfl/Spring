@@ -3,7 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <head>
 	<title>대전시-자유게시판</title>
@@ -41,7 +41,7 @@
     <section class="content">
 		<div class="card">
 			<div class="card-header with-border">
-				<button type="button" class="btn btn-primary" id="registBtn" onclick="OpenWindow('registForm.do','자료등록',1000,700)">자료등록</button>
+				<button type="button" class="btn btn-primary" id="registBtn">자료등록</button>
 				<div id="keyword" class="card-tools" style="width:350px;">	
 					<div class="input-group row">
 						
@@ -75,7 +75,7 @@
 					</tr>
 					<c:if test="${empty dataMap.boardList }">
 						<tr>
-							<td colspan="5">
+							<td colspan="6">
 								<strong>해당 내용이 없습니다.</strong>
 							</td>
 						</tr>
@@ -85,16 +85,24 @@
 							<td>${board.bno }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100%;
 							overflow: hidden; whith-space: nowrap; text-overflow: ellipsis;">
-							<a href= "javascript:OpenWindow('detail.do${pageMaker.makeQuery() }&bno=${board.bno }','상세보기',1000,700);">
-								<span class="col-sm-12">${board.title }</span>
+							<a class ="detailBtn" href="detail.do${pageMaker.makeQuery(pageMaker.cri.page) }&bno=${board.bno }&state=list">
+								<span class="col-sm-12">${board.title } &nbsp;&nbsp;&nbsp;<font color="purple" size="2px"> +${board.replycnt }</font></span>
 							</a>
 						</td>
 						<td>${board.writer }</td>
 						<td>
 							<fmt:formatDate value="${board.regDate }" pattern="yyyy-MM-dd"/>
 						</td>
-						<td><span class="badge bg-red">${board.viewcnt }</span></td>
-						<td><span class="badge"><img src="<%=request.getContextPath()%>/resources/images/file.png" ></span></td>							
+						<td>
+							<span class="badge bg-purple">${board.viewcnt }</span>
+						</td>						
+						<td>
+							<c:if test="${!empty board.attachList }"> 
+								 <div class="badge">
+									  <img src="<%=request.getContextPath()%>/resources/images/file.png" style="width:20px;height:20px;" > x  ${fn:length(board.attachList)}
+								</div>							
+							</c:if> 					
+						</td>
 						</tr>					
 					</c:forEach>
 				</table>
@@ -120,7 +128,15 @@
 		  <input type='hidden' name="keyword" 
 		         value="${pageMaker.cri.keyword }" />
 	</form>
- 
+	<form role="form">
+	  	<input type='hidden' name='bno' value ="${board.bno}">  	
+	  	<input type='hidden' name='page' value ="${pageMaker.cri.page}">  	
+	  	<input type='hidden' name='perPageNum' value ="${pageMaker.cri.perPageNum}">  	
+	  	<input type='hidden' name='searchType' value ="${pageMaker.cri.searchType}">  	
+	  	<input type='hidden' name='keyword' value ="${pageMaker.cri.keyword}"> 		  	
+   </form>
+	
+ 	<%@ include file="./list_js.jsp" %>
  	<script>
  		$('#searchBtn').on('click',function(e){
  			

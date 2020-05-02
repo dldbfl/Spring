@@ -7,8 +7,8 @@ $('#addFileBtn').on('click',function(event){
 	var inputFile=$('input[name="uploadFile"]').length;	
 	var attachCount=attachedFile+inputFile;
 	
-	if(attachCount >=5){
-		alert("파일추가는 5개까지만 가능합니다.");
+	if(attachCount >=3){
+		alert("파일추가는 3개까지만 가능합니다.");
 		return;
 	}
 	
