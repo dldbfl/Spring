@@ -3,7 +3,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("자료 등록에 성공했소!")
+Swal.fire(
+		  'Good job!',
+		  '자료 등록에 성공했소!',
+		  'success'
+		)
 	window.location.href="list.do?page=1&perPageNum=10";		
 </script>
 

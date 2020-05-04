@@ -1043,7 +1043,7 @@ body {
 }
 .footer .linkArea .siteLink a {
 	color: #d7d8d9;
-	background:url(/images/drh/layout/index_2018/sitelink_icon.gif ) no-repeat 100% 50%; padding-right:10px;;
+	
 }
 .footer .linkArea .siteLink a:before {
 	content: '';
@@ -1954,9 +1954,6 @@ body {
 	padding: 0 18px;
 	border: 1px solid #646464;
 }
-
-.footer .linkArea .siteLink a {background: url(/images/drh/layout/index_2018/sitelink_icon.gif) no-repeat 95% 50%;}
-
 
 .footer .linkArea .siteLink a:before {
 	display: none;

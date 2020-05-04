@@ -47,6 +47,9 @@ public class BoardListAction implements Action {
 		
 		try {
 			Map<String,Object> dataMap = boardService.getList(cri);
+			
+/*			request.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html;charset=UTF-8");*/
 			request.setAttribute("dataMap", dataMap);
 		
 		} catch (SQLException e) {			

@@ -3,6 +3,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("수정이 완료되었습니다.");
+Swal.fire(
+		  'Good job!',
+		  '수정이 완료 되었소!',
+		  'success'
+		)
 	location.href="detail.do${pageMaker.makeQuery()}&bno=${board.bno}&from=modify";
 </script>

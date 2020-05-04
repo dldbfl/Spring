@@ -5,7 +5,7 @@
 <title>자료등록</title>
 <body>
   <!-- Content Wrapper. Contains page content -->
-  <div>
+   <div class="content-wrapper">
     <jsp:include page="content_header.jsp">
     	<jsp:param value="자료실" name="subject"/>
 		<jsp:param value="등록" name="item"/>
@@ -40,7 +40,7 @@
 								<div class="card card-outline card-success">
 									<div class="card-header">
 										<h5 style="display:inline;line-height:40px;">첨부파일 : </h5>
-										&nbsp;&nbsp;<button class="btn btn-xs btn-primary" 
+										&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-flat" 
 										type="button" id="addFileBtn">Add File</button>
 									</div>									
 									<div class="card-footer fileInput">
@@ -50,9 +50,9 @@
 						</form>
 					</div><!--end card-body  -->
 					<div class="card-footer">
-						<button type="button" class="btn btn-primary" id="registBtn">등 록</button>
+						<button type="button" class="btn btn-outline-secondary btn-flat" id="registBtn">등 록</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<button type="button" class="btn" id="cancelBtn" onclick="CloseWindow();">취 소</button>
+						<button type="button" class="btn" id="cancelBtn" >취 소</button>
 					</div><!--end card-footer  -->
 				</div><!-- end card -->				
 			</div><!-- end col-md-12 -->

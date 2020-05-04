@@ -5,11 +5,11 @@
 		<pattern>/*</pattern>				
 	</decorator>
 		
-	<decorator name="open_window" page="open_decorator.jsp"> 
+<!-- 	<decorator name="open_window" page="open_decorator.jsp"> 
 		<pattern>/**/regist*</pattern>
 		<pattern>/**/modify*</pattern>
 		<pattern>/**/detail*</pattern>
-	</decorator>
+	</decorator> -->
 		
 	<excludes>
 		<pattern>/commons/login*.do</pattern>

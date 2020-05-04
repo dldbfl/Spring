@@ -18,7 +18,7 @@
 	
 <body>
   <c:set var="pageMaker" value="${dataMap.pageMaker }" />	  	
-   <div class="content-wrapper" 	>
+   <div class="content-wrapper" >
    
    <jsp:include page="content_header.jsp">
 		<jsp:param value="대전시-자유게시판" name="subject"/>
@@ -29,12 +29,11 @@
 
     <!-- Main content -->
     <section class="content">
-    	<div class="container">
 		<div class="card">
 			<div class="card-header with-border">
-				
-				<div>총<font color="purple" size="4px"> &nbsp; ${fn:length(dataMap.boardList)}</font>&nbsp;건 &nbsp;|&nbsp;&nbsp;&nbsp;<font color="purple" size="4px">${pageMaker.cri.page}/${pageMaker.realEndPage} </font>&nbsp;페이지
-				<div id="keyword" class="card-tools" style="float:right">	
+				<button type="button" class="btn btn-primary" id="registBtn">자료등록</button>
+				<p>총<font color="purple" size="4px"> &nbsp; ${fn:length(dataMap.boardList)}</font>&nbsp;건 &nbsp;|&nbsp;&nbsp;&nbsp;<font color="purple" size="4px">${pageMaker.cri.page}/${pageMaker.realEndPage} </font>&nbsp;페이지</p>
+				<div id="keyword" class="card-tools" style="width:350px;">	
 					<div class="input-group row">
 						
 						<select class="form-control" name= "searchType" id = "searchType">
@@ -48,13 +47,12 @@
 					
 						<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." accept="utf-8" value="${param.keyword }"/>
 						<span class="input-group-append">
-							<button class="btn btn-block btn-outline-secondary btn-flat" type="button" id="searchBtn" data-card-widget="search" onclick="searchList_go(1);" >
+							<button class="btn btn-primary" type="button" id="searchBtn" data-card-widget="search" onclick="searchList_go(1);" >
 								<i class="fa fa-fw fa-search"></i>
 							</button>
 						</span>
 					</div>						
-				</div>	
-				</div>		
+				</div>			
 			</div>
 			<div class="card-body">
 				<table class="table table-bordered text-center">
@@ -105,10 +103,8 @@
 					<!-- <ul class="pagination justify-content-center m-0"> -->
 						<%@ include file="/WEB-INF/views/pagination/pagination.jsp" %>
 					<!-- </ul> -->
-					<button type="button" class="btn btn-outline-secondary btn-flat" id="registBtn" style="float:right">자료등록</button>
 				<!-- </nav> -->
 			</div>
-		</div>
 		</div>
 	</section>
     <!-- /.content -->

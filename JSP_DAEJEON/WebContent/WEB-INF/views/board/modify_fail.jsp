@@ -3,6 +3,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("서비스 장애로 실패했습니다.");
+Swal.fire({
+	  icon: 'error',
+	  title: 'Oops...',
+	  text: '서비스 장애로 실패하였습니다!'
+	})
 	history.go(-1);
 </script>

@@ -3,6 +3,15 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<style>
+.page-item.active .page-link {
+	background-color: green;
+}
+.page-link{
+	color: green;
+}
+</style>
+
 
  <nav aria-label="member list Navigation">
 	<ul class="pagination justify-content-center m-0">
@@ -36,8 +45,8 @@
 	</ul>
 </nav>   	
 
-<form id="jobForm">
-	<input type='hidden' name="page" value="${pageMaker.cri.page}" />
+<form id="jobForm" >
+	<input type='hidden' name="page" value="${pageMaker.cri.page}"/>
 	<input type='hidden' name="perPageNum" value="${pageMaker.cri.perPageNum}"/>
 	<input type='hidden' name="searchType" value="${pageMaker.cri.searchType }" />
 	<input type='hidden' name="keyword" value="${pageMaker.cri.keyword }" />

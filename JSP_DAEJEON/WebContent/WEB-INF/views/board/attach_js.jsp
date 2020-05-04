@@ -6,7 +6,11 @@
 $('#addFileBtn').on('click',function(event){
 	
 	if($('input[name="uploadFile"]').length >=3){
-		alert("파일추가는 3개까지만 가능합니다.");
+		Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: '파일 추가는 3개까지 가능합니다!'
+			})
 		return;
 	}
 	
@@ -24,7 +28,11 @@ $('div.fileInput').on('click','div.inputRow > button',function(event){
 
 $('.fileInput').on('change','input[type="file"]',function(event){
 	if(this.files[0].size>1024*1024*40){
-		alert("파일 용량이 40MB를 초과하였습니다.");
+		Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: '파일 용량이 40MB를 초과했습니다!'
+			})
 		this.value="";
 		$(this).focus();
 		return false;

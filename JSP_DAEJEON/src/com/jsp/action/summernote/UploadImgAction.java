@@ -61,9 +61,9 @@ public class UploadImgAction implements Action {
 				for (FileItem item : formItems) { // form items 반복하여 꺼내는 구문
 					if (!item.isFormField()) { // 파일일 경우 해당
 						// uuid+구분자+파일명
-						/*String fileName = MakeFileName.toUUIDFileName(".jpg", "");*/
-						String fileName = new File(item.getName()).getName();
-						fileName = MakeFileName.toUUIDFileName(fileName, "$$");
+						String fileName = MakeFileName.toUUIDFileName(".jpg", "");
+						/*String fileName = new File(item.getName()).getName();
+						fileName = MakeFileName.toUUIDFileName(fileName, "$$");*/
 						
 						//파라미터에 &&을 넣으면 안대. 알았니
 						

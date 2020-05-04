@@ -3,7 +3,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("자료 등록에 실패했소!")
+Swal.fire({
+	  icon: '성대한 실패',
+	  title: 'Oops...',
+	  text: '자료 등록에 실패했소!'
+	})
 	hestory.go(-1);
 </script>
 

@@ -26,8 +26,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   
   <!-- jQuery -->
   <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-	
-	
+	 
+  <!-- swal fire -->	
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/toastr/toastr.min.js"></script>
+  <!-- 대전시청 css -->
   <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/cityrayout.css">	
 <decorator:head/>
 <style>
@@ -35,22 +38,61 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	
 </style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="sidebar-collapse layout-top-nav">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">	
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="<%=request.getContextPath() %>/board/list.do" class="nav-link">자유게시판</a>
+        <a href="<%=request.getContextPath() %>/board/list.do" class="nav-link">대전시 - 자유게시판</a>
       </li>
+      <!-- <li class="nav-item dropdown show">
+      	<a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="nav-link dropdown-toggle">Dropdown</a>
+      		드롭다운 내용
+      		<ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow show">
+              <li><a href="#" class="dropdown-item">Some action </a></li>
+              <li><a href="#" class="dropdown-item">Some other action</a></li>
+
+              <li class="dropdown-divider"></li>
+
+              Level two dropdown
+              <li class="dropdown-submenu dropdown-hover">
+                <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
+                <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
+                  <li>
+                    <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
+                  </li>
+
+                  Level three dropdown
+                  <li class="dropdown-submenu">
+                    <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
+                    <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
+                      <li><a href="#" class="dropdown-item">3rd level</a></li>
+                      <li><a href="#" class="dropdown-item">3rd level</a></li>
+                    </ul>
+                  </li>
+                  End Level three
+
+                  <li><a href="#" class="dropdown-item">level 2</a></li>
+                  <li><a href="#" class="dropdown-item">level 2</a></li>
+                </ul>
+              </li>
+              End Level two
+            </ul> 
+                 
+      </li> -->
 
     </ul>
-
-
+    <ul class ="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+		<li>
+			<button class="btn btn-block btn-outline-secondary btn-flat " type="button" 
+          		onclick="location.href='<%=request.getContextPath() %>/commons/logout.do';" >Logout</button>
+		</li>
+	</ul>
    
   </nav>
   <!-- /.navbar -->
@@ -59,7 +101,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     
-      <img src="<%=request.getContextPath()%>/resources/images/lefttop.png" 
+      <img src="<%=request.getContextPath()%>/resources/images/topleft.png" 
            style="opacity: .;width:250px; height:auto;">
       
 
@@ -70,8 +112,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
        
         <div class="info">
           <div class="row">
-          <button class="btn btn-xs btn-primary col-xs-3 " type="button" 
-          		onclick="location.href='<%=request.getContextPath() %>/commons/logout.do';" >Logout</button>
+          
           </div>
 		          
         </div>
@@ -79,6 +120,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
+      
+      
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview"
         	data-accordion="false">
      

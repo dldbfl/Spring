@@ -10,7 +10,7 @@
  	<div class="timeline-item" >
   		<span class="time">
     		<i class="fa fa-clock"></i>{{prettifyDate regdate}}
-	 		<a class="btn btn-primary btn-xs" id="modifyReplyBtn"
+	 		<a class="btn btn-outline-secondary btn-xs" id="modifyReplyBtn"
 	    		data-replyer={{replyer}} data-toggle="modal" data-target="#modifyModal">Modify</a>
   		</span>
 	
@@ -113,7 +113,11 @@ $('#replyAddBtn').on('click',function(e){
 		success:function(data){
 			var result=data.split(',');
 			if(result[0]=="SUCCESS"){
-				alert('댓글이 등록되었습니다.');	
+				Swal.fire(
+						  'Good job!',
+						  '댓글이 등록되었소!',
+						  'success'
+						)
 				getPage("<%=request.getContextPath()%>/replies/list.do?bno=${board.bno}&page="+result[1]);
 				$('#newReplyText').val("");
 			}else{

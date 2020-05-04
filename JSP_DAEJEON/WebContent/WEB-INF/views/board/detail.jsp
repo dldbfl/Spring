@@ -8,9 +8,9 @@
 	<!-- Ionicons -->
   	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 </head>
-<body>
+<body class="sidebar-collapse layout-top-nav">
   <!-- Content Wrapper. Contains page content -->
-  <div >
+  <div class="content-wrapper">
   	  <jsp:include page="content_header.jsp">
     	<jsp:param value="자유게시판" name="subject"/>
 		<jsp:param value="상세보기" name="item"/>
@@ -18,6 +18,7 @@
     </jsp:include>
 
     <!-- Main content -->
+    
     <section class="content container-fluid">
 		<div class="row">
 			<div class="col-md-12">
@@ -83,10 +84,10 @@
 					</div>
 					<div class="card-footer">
 						<c:if test="${loginUser.id eq board.writer }">
-							<button type="button" id="modifyBtn" class="btn btn-warning">Modify</button>						
-					    	<button type="button" id="removeBtn" class="btn btn-danger">REMOVE</button>
+							<button type="button" id="modifyBtn" class="btn btn-outline-warning btn-flat">Modify</button>						
+					    	<button type="button" id="removeBtn" class="btn btn-outline-danger btn-flat">REMOVE</button>
 					   </c:if>
-					    <button type="button" id="listBtn" class="btn btn-primary">GO LIST </button>
+					    <button type="button" id="listBtn" class="btn btn-outline-secondary btn-flat">GO LIST </button>
 					</div>									
 				</div><!-- end card -->				
 			</div><!-- end col-md-12 -->
@@ -102,7 +103,7 @@
 						<div class="timeline">
 							<!-- timeline time label -->
 							<div class="time-label" id="repliesDiv">
-								<span class="bg-green">Replies List </span>							
+								<span class="bg-outline-green">Replies List </span>							
 							</div>
 							
 						</div>
@@ -121,7 +122,7 @@
 						<input class="form-control" type="text"	placeholder="REPLY TEXT" 
 						       id="newReplyText">
 						<br/>
-						<button type="button" class="btn btn-primary" 
+						<button type="button" class="btn btn-outline-primary btn-flat" 
 								id="replyAddBtn">ADD REPLY</button>
 					</div>				
 				</div>			
@@ -158,9 +159,9 @@
         <p><input type="text" id="replytext" class="form-control"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-info" id="replyModBtn">Modify</button>
-        <button type="button" class="btn btn-danger" id="replyDelBtn">DELETE</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-info btn-flat" id="replyModBtn">Modify</button>
+        <button type="button" class="btn btn-outline-danger btn-flat" id="replyDelBtn">DELETE</button>
+        <button type="button" class="btn btn-outline-secondary btn-flat" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

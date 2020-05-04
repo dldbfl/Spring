@@ -3,6 +3,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 
 <script>
-	alert("삭제가 성공하였습니다.");
+Swal.fire(
+		  'Good job!',
+		  '삭제가 성공하였소!',
+		  'success'
+		)
 	window.location.href="list.do?page=1&perPageNum=10";
 </script>

@@ -7,7 +7,7 @@
 
 <body>
   <!-- Content Wrapper. Contains page content -->
-  <div>
+    <div class="content-wrapper">
      <jsp:include page="content_header.jsp">
     	<jsp:param value="자료실" name="subject"/>
 		<jsp:param value="수정" name="item"/>
@@ -50,7 +50,7 @@
 								<div class="card card-outline card-success">
 									<div class="card-header">
 										<h3 style="display:inline;line-height:40px;">첨부파일 : </h3>
-										&nbsp;&nbsp;<button class="btn btn-primary" 
+										&nbsp;&nbsp;<button class="btn btn-outline-secondary btn-flat" 
 										type="button" id="addFileBtn">Add File</button>
 									</div>									
 									<div class="card-footer fileInput">
@@ -78,7 +78,7 @@
 						</form>
 					</div><!--end card-body  -->
 					<div class="card-footer">
-						<button type="button" class="btn btn-warning" id="modifyBtn">수 정</button>
+						<button type="button" class="btn btn-outline-secondary btn-flat" id="modifyBtn">수 정</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="btn" id="cancelBtn">취 소</button>
 					</div><!--end card-footer  -->
@@ -104,14 +104,22 @@ $('#modifyBtn').on('click',function(e){
 	for(var file of files){
 		console.log(file.name+" : "+file.value);
 		if(file.value==""){
-			alert("파일을 선택하세요.");
+			Swal.fire(
+					  'What the File?',
+					  '파일 올린거 맞나요?',
+					  'question'
+					)
 			file.focus();
 			return false;
 		}
 	}	
 	
 	if(form.content.value.length>1000){
-		alert("글자수가 1000자를 초과할 수 없습니다.");
+		Swal.fire({
+			  icon: 'error',
+			  title: 'Oops...',
+			  text: '글자수가 1000자를 초과할 수 없어요.'
+			})
 		return;
 	}
 	
