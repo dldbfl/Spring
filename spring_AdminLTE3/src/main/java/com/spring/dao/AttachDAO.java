@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.spring.dto.AttachVO;
 
-
 public interface AttachDAO {
 	
 	public List<AttachVO> selectAttachesByPno(int pno)throws SQLException;

@@ -47,7 +47,7 @@
 		board
 		where bno is not null  			  	
 		<include refid="search" />
-		order by bno desc
+		order by regDate desc
 	</select>
 	
 	<select id="selectSearchBoardListCount" 

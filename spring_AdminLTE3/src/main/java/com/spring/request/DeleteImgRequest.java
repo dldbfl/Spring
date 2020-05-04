@@ -1,7 +1,7 @@
 package com.spring.request;
 
 public class DeleteImgRequest {
-	
+
 	private String fileName;
 
 	public String getFileName() {
@@ -11,6 +11,4 @@ public class DeleteImgRequest {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
-	
 }

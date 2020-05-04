@@ -5,33 +5,32 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.spring.dto.BoardVO;
 import com.spring.request.SearchCriteria;
 
 public class BoardDAOImpl implements BoardDAO{
-	
 	private SqlSession sqlSession;
-	public void setSqlSession(SqlSession sqlSession) {
+	public  void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 	
 	@Override
 	public List<BoardVO> selectBoardCriteria(SearchCriteria cri) throws SQLException {
-			int offset=cri.getPageStartRowNum();
+		
+		int offset=cri.getPageStartRowNum();
 		int limit=cri.getPerPageNum();		
 		RowBounds rowBounds=new RowBounds(offset,limit);		
 		
 		List<BoardVO> boardList=
 				sqlSession.selectList("Board-Mapper.selectSearchBoardList",cri,rowBounds);
-		sqlSession.close();
 		
 		return boardList;
 	}
 	
 	@Override
 	public int selectBoardCriteriaTotalCount(SearchCriteria cri) throws SQLException {
+				
 		int count=sqlSession.selectOne("Board-Mapper.selectSearchBoardListCount",cri);
 		return count;
 	}
@@ -40,7 +39,7 @@ public class BoardDAOImpl implements BoardDAO{
 	public BoardVO selectBoardByBno(int bno) throws SQLException {
 		BoardVO board=
 				sqlSession.selectOne("Board-Mapper.selectBoardByBno",bno);
-	return board;
+		return board;
 	}
 
 	@Override
@@ -66,7 +65,7 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public int selectBoardSeqNext() throws SQLException {
 		int seq_num=
-		sqlSession.selectOne("Board-Mapper.selectBoardSeqNext");
+				sqlSession.selectOne("Board-Mapper.selectBoardSeqNext");
 		return seq_num;
 	}
 }

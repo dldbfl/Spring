@@ -10,10 +10,9 @@ import com.spring.dto.MemberVO;
 import com.spring.request.SearchCriteria;
 
 public class MemberDAOImpl implements MemberDAO {
-	
 	private SqlSession sqlSession;
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession=sqlSession;
+	public  void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
 	
 	@Override
@@ -22,29 +21,12 @@ public class MemberDAOImpl implements MemberDAO {
 				"Member-Mapper.selectMemberList", null);
 		return memberList;
 	}
+
 	@Override
 	public int selectMemberListCount() throws SQLException {
-		int count = sqlSession.selectOne("Member-Mapper.selectMemberListCount", null);
-		return count;
-	}
-	
-	@Override
-	public List<MemberVO> selectMemberList(SearchCriteria cri) throws SQLException {
-		int offset = cri.getPageStartRowNum();
-		int limit = cri.getPerPageNum();
-		RowBounds rowBounds = new RowBounds(offset, limit);
-
-		List<MemberVO> memberList = null;
-		
-		memberList=sqlSession.selectList("Member-Mapper.selectSearchMemberList",cri,rowBounds);
-
-		return memberList;
-	}
-	
-	@Override
-	public int selectMemberListCount(SearchCriteria cri) throws SQLException {
 		int count=0;		
-		count=sqlSession.selectOne("Member-Mapper.selectSearchMemberListCount",cri);
+		count=sqlSession.selectOne("Member-Mapper.selectMemberListCount",null);
+		
 		return count;
 	}
 
@@ -57,6 +39,7 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void insertMember(MemberVO member) throws SQLException {
 		sqlSession.update("Member-Mapper.insertMember",member);
+
 	}
 
 	@Override
@@ -70,19 +53,43 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update("Member-Mapper.deleteMember",id);
 
 	}
-
 	@Override
 	public void disabledMember(String id) throws SQLException {
 		sqlSession.update("Member-Mapper.disabledMember",id);
+		
 	}
-	
 	@Override
 	public void enabledMember(String id) throws SQLException {
 		sqlSession.update("Member-Mapper.enabledMember",id);
 		
 	}
-	
-	
+
+
+	@Override
+	public List<MemberVO> selectMemberList(SearchCriteria cri) throws SQLException {
+		
+		int offset = cri.getPageStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+
+		List<MemberVO> memberList = null;
+
+		
+		memberList=sqlSession.selectList("Member-Mapper.selectSearchMemberList",cri,rowBounds);
+
+		return memberList;
+	}
+
+
+	@Override
+	public int selectMemberListCount(SearchCriteria cri) throws SQLException {
+		int count=0;		
+		count=sqlSession.selectOne("Member-Mapper.selectSearchMemberListCount",cri);
+		
+		
+		return count;
+	}
+
 }
 
 

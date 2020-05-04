@@ -31,14 +31,10 @@ public class PageMaker {
 		prev = startPage == 1 ? false : true;
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
-	 
-	//지 페이지
-	public String makeQuery(){	
+	   
+	public String makeQuery(){
 		return makeQuery(cri.getPage());
 	}
-	
-	
-	//다른 페이지(페이지 네이션
 	public String makeQuery(int page){	
 		String query="?page="+page
 				    +"&perPageNum="+cri.getPerPageNum()

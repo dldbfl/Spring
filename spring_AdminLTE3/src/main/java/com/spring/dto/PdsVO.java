@@ -12,7 +12,9 @@ public class PdsVO {
 	private Date regDate;
 	private Date updatedate;
 	
+	
 	private List<AttachVO> attachList;
+	
 	
 	
 	public List<AttachVO> getAttachList() {

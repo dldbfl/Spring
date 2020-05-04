@@ -25,18 +25,17 @@ public class BoardServiceImpl implements BoardService {
 	}
 		
 
-	@Override//조회수 고정.
+	@Override
 	public BoardVO getBoardForModify(int bno) throws SQLException {
 		BoardVO board = boardDAO.selectBoardByBno(bno);
 		return board;
 	}
-	@Override//조회수 증가.
+	@Override
 	public BoardVO getBoard(int bno) throws SQLException {
-		boardDAO.increaseViewCnt(bno);
 		BoardVO board = boardDAO.selectBoardByBno(bno);
+		boardDAO.increaseViewCnt(bno);
 		return board;
 	}
-	
 
 	@Override
 	public void write(BoardVO board) throws SQLException {

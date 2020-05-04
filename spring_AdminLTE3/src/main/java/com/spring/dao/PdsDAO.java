@@ -3,8 +3,8 @@ package com.spring.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.spring.request.SearchCriteria;
 import com.spring.dto.PdsVO;
+import com.spring.request.SearchCriteria;
 
 public interface PdsDAO {
 	
@@ -22,6 +22,4 @@ public interface PdsDAO {
 	
 	//pds_seq.nextval 가져오기
 	int getSeqNextValue() throws SQLException;
-	
-	
 }

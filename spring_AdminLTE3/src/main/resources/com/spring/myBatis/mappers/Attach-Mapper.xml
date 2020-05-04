@@ -16,9 +16,9 @@
 	
 	<update id="insertAttach">
 		insert into 
-		attach (ano, uploadpath, filename, pno, attacher, fileType)
-		values (attach_seq.nextval, #{uploadPath}, #{fileName}, 
-				#{pno},#{attacher},#{fileType} )
+		attach (ano, uploadpath, filename, filetype, pno, attacher)
+		values (attach_seq.nextval, #{uploadPath}, #{fileName},#{fileType}, 
+				#{pno},#{attacher} )
 	</update>
 	
 	<update id="deleteAttach">
@@ -30,6 +30,5 @@
 		from attach 
 		where pno = #{pno}
 	</update>
-
 
 </mapper>

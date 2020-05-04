@@ -1,12 +1,8 @@
 package com.spring.dao;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,22 +14,27 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.spring.dao.MemberDAO;
 import com.spring.dto.MemberVO;
-import com.spring.request.SearchCriteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:/com/spring/context/root-context.xml")
-@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=false) // 무조건 롤백하겠다.
-@Transactional //트렌젝션 하겠다.
+@TransactionConfiguration(transactionManager="transactionManager",defaultRollback=false)
+@Transactional
 public class TestMemberDAOImpl {
 	
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	@Before
-	public void init(){}
-	
-
 	@Test
+	public void testSelectMember()throws SQLException{
+		String id="mimi";
+		
+		MemberVO member = memberDAO.selectMemberById(id);
+		
+		Assert.assertEquals(id,member.getId());
+	}
+	
+	@Test
+	@Rollback
 	public void testInsertMember()throws SQLException{
 		MemberVO member = new MemberVO();
 		member.setId("kaka");
@@ -42,25 +43,18 @@ public class TestMemberDAOImpl {
 		member.setEmail("kaka@kaka.net");
 		member.setPhone("000-0000-0000");
 		member.setPicture("noImage.jpg");
-
+		
 		memberDAO.insertMember(member);
 		
 		MemberVO result = memberDAO.selectMemberById("kaka");
 		
-		Assert.assertEquals(member.getId(), result.getId());
+		Assert.assertEquals(member.getId(),result.getId());
 	}
-	
-	@Test
-	@Rollback
-	public void testSelectMember()throws SQLException{
-		
-		String id="mimi";
-		
-		MemberVO member = memberDAO.selectMemberById(id);
-		
-		Assert.assertEquals(id, member.getId());
-	}
-	
-	
 	
 }
+
+
+
+
+
+

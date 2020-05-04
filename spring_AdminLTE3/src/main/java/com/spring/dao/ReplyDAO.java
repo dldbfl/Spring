@@ -12,8 +12,7 @@ public interface ReplyDAO {
 	void updateReply(ReplyVO reply)throws SQLException;
 	void deleteReply(int rno)throws SQLException;
 	
-	int selectReplySeqNextValue() throws SQLException;
-		
+	int selectReplySeqNextValue()throws SQLException;
 	List<ReplyVO> selectReplyListPage(int bno,SearchCriteria cri)	
 								throws SQLException;
 	int countReply(int bno) throws SQLException;

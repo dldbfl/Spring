@@ -53,7 +53,7 @@ public class TestBasicDataSource {
 		
 		String sql="select * from member where id='"+id+"'";
 		
-		this.stmt = this.conn.createStatement();
+		this.stmt = this.conn.createStatement(); 
 		this.rs = this.stmt.executeQuery(sql);
 		
 		MemberVO member=null;

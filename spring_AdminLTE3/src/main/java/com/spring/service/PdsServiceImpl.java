@@ -5,15 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.spring.request.PageMaker;
-import com.spring.request.SearchCriteria;
 import com.spring.dao.AttachDAO;
 import com.spring.dao.PdsDAO;
 import com.spring.dto.AttachVO;
 import com.spring.dto.PdsVO;
+import com.spring.request.PageMaker;
+import com.spring.request.SearchCriteria;
 
 public class PdsServiceImpl implements PdsService {
-	
 		
 	private PdsDAO pdsDAO;
 	public void setPdsDAO(PdsDAO pdsDAO) {
@@ -61,7 +60,6 @@ public class PdsServiceImpl implements PdsService {
 	@Override
 	public void modify(PdsVO pds) throws SQLException {
 		pdsDAO.updatePds(pds);		
-		System.out.println(pds);
 		//attachDAO.deleteAllAttach(pds.getPno());
 		for(AttachVO attach:pds.getAttachList()) {
 			attach.setPno(pds.getPno());

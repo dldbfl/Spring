@@ -11,8 +11,6 @@ import com.spring.dao.MemberDAO;
 import com.spring.dto.MemberVO;
 import com.spring.exception.InvalidPasswordException;
 import com.spring.exception.NotFoundIDException;
-import com.spring.exception.NullidException;
-import com.spring.exception.NullpasswordException;
 import com.spring.request.SearchCriteria;
 
 public class TestMemberServiceImpl {
@@ -49,7 +47,7 @@ public class TestMemberServiceImpl {
 		Assert.assertEquals(2,memberList.size());
 	}
 	@Test
-	public void testLogin()throws SQLException, NullidException, NullpasswordException{
+	public void testLogin()throws SQLException{
 		String testID = "kkk";
 		String testPWD ="kkk";
 		
