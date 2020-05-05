@@ -32,8 +32,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	@Override
 	public BoardVO getBoard(int bno) throws SQLException {
-		BoardVO board = boardDAO.selectBoardByBno(bno);
 		boardDAO.increaseViewCnt(bno);
+		BoardVO board = boardDAO.selectBoardByBno(bno);
 		return board;
 	}
 

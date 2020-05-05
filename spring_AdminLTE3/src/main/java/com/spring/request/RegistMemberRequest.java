@@ -1,4 +1,4 @@
-package com.spring.request.member;
+package com.spring.request;
 
 public class RegistMemberRequest {
 	

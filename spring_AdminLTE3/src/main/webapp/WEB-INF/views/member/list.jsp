@@ -38,7 +38,8 @@
     	<section class="content">
     	  <div class="card">    
     	  	<div class="card-header with-border">
-    	  		<c:if test="${loginUser.authority eq 'ROLE_ADMIN' }" >
+    	  		<c:if test="${true }">
+    	  		<%-- <c:if test="${loginUser.authority eq 'ROLE_ADMIN' }" > --%>
     	  			<button type="button" class="btn btn-primary" 
     	  			onclick="OpenWindow('registForm.do','회원등록',800,600);" >회원등록</button>
     	  		</c:if>

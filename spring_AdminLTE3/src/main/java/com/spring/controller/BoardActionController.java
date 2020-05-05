@@ -36,10 +36,6 @@ public class BoardActionController {
 		
 		Map<String, Object> dataMap = boardService.getBoardList(cri);
 		
-		//request 방식으로 예전처럼 넣기
-		/*request.setAttribute("memberList", (List<MemberVO>)dataMap.get("memberList"));
-		request.setAttribute("pageMaker", (PageMaker)dataMap.get("pageMaker"));*/
-		
 		//하나넣기
 		//model.addAttribute("pageMaker", (PageMaker)dataMap.get("pageMaker"));
 		
@@ -54,7 +50,7 @@ public class BoardActionController {
 
 	
 	@RequestMapping("registForm.do")
-	public String registForm(Model model)throws Exception{
+	public String registForm()throws Exception{
 		
 		String url = "board/registBoard";
 		

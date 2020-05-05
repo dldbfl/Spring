@@ -20,11 +20,11 @@ function CloseWindow(){
 //form submit
 function SubmitMember(formRole){
 	var uploadCheck = $('input[name="checkUpload"]').val();
-	if(!(uploadCheck>0)){
+	/*if(!(uploadCheck>0)){
 		alert("사진 업로드는 필수입니다.");	
 		//$('input[name="pictureFile"]').click();
 		return;
-	}
+	}*/
 	var form = $('form[role="'+formRole+'"]');
 	form.submit();
 }
