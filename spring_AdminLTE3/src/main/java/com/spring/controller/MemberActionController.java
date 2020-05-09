@@ -11,15 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.utils.GetUploadPath;
-import com.spring.request.RegistMemberRequest;
 import com.spring.dto.BoardVO;
 import com.spring.dto.MemberVO;
 import com.spring.request.MemberRegistRequest;
@@ -168,18 +170,18 @@ public class MemberActionController {
 		}
 		
 		@RequestMapping("checkpassword.do")
-		public void checkpassword(String pwd,HttpServletRequest request,
-				HttpServletResponse response, HttpSession session)throws Exception{
+		@ResponseBody
+		public ResponseEntity<String> checkpassword(String pwd, HttpSession session)throws Exception{
 			
-			String result = null;
+			ResponseEntity<String> entity = null;
 						
 			MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
 	    	if(loginUser.getPwd().equals(pwd)) {
-	    		result= "SUCCESS";
+	    		entity = new ResponseEntity<String>(HttpStatus.OK);
+	    	}else {
+	    		entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	    	}
-	    		    	
-			response.getWriter().print(result);
-			
+	    	return entity;
 		}
 		
 		@RequestMapping("disabled.do")

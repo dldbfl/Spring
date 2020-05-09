@@ -58,8 +58,8 @@
 	</filter-mapping>
 	
 	
-	<welcome-file-list>
+<!-- <welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
+	</welcome-file-list> 이제 이거 안써 -->
 
 </web-app>

@@ -132,12 +132,15 @@
 		$.ajax({
 			url:"checkpassword.do?pwd="+pwd,
 			type:"get",
+			contentType:"application/json", //보내는 data 형식 지정
+			dataType:"text", //받는 data 형식 지정
 			success:function(data){
-				if(data=="SUCCESS"){
-					location.href="remove.do?id=${member.id}";
-				}else{
-					alert("패스워드가 일치하지 않습니다.");
-				}
+				
+				location.href="remove.do?id=${member.id}";
+				
+			},
+			error:function(error){
+				alert("패스워드가 일치하지 않습니다.");
 			}
 		});
 		

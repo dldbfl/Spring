@@ -31,10 +31,18 @@ public class PageMaker {
 		prev = startPage == 1 ? false : true;
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
-	   
-	public String makeQuery(){
-		return makeQuery(cri.getPage());
+	
+	@Override
+	public String toString() {
+		return "PageMaker [totalCount=" + totalCount + ", startPage="
+				+ startPage + ", endPage=" + endPage + ", realEndPage="
+				+ realEndPage + ", prev=" + prev + ", next=" + next
+				+ ", displayPageNum=" + displayPageNum + ", cri=" + cri + "]";
 	}
+	
+	/*public String makeQuery(){
+		return makeQuery(cri.getPage());
+	}*/
 	public String makeQuery(int page){	
 		String query="?page="+page
 				    +"&perPageNum="+cri.getPerPageNum()
@@ -42,6 +50,14 @@ public class PageMaker {
 				    +"&keyword="+cri.getKeyword();
 		return query;
 	}
+	
+/*	public static String makeQuery(SearchCriteria cri){	
+		String query="?page="+cri.getPage()
+				    +"&perPageNum="+cri.getPerPageNum()
+				    +"&searchType="+cri.getSearchType()
+				    +"&keyword="+cri.getKeyword();
+		return query;
+	}*/
 	
 
 	public int getTotalCount() {

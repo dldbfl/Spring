@@ -17,7 +17,7 @@
 </head>	
 	
 <body>
-  <c:set var="pageMaker" value="${pageMaker }" />	
+ 
   	
    <div class="content-wrapper" >
     

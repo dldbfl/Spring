@@ -2,5 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
- <jsp:forward page="/commons/loginForm.do"></jsp:forward> 
+<%--  <jsp:forward page="/commons/loginForm.do"></jsp:forward>  --%>
 <%-- <%@ include file="WEB-INF/views/commons/loginForm.jsp" %>  --%>
+
+<script>
+	location.href = "<%=request.getContextPath()%>/commons/loginForm.do";
+</script>

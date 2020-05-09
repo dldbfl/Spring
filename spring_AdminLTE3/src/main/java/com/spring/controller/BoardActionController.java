@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.spring.dto.BoardVO;
 import com.spring.request.ModifyBoardRequest;
@@ -101,22 +101,26 @@ public class BoardActionController {
 	}
 	
 	@RequestMapping("modify.do")
-	public String modify(ModifyBoardRequest modifyReq, int bno,
-			String state, PageMaker pageMaker,SearchCriteria cri,
+	public String modify(ModifyBoardRequest modifyReq,
+			String state, /*SearchCriteria cri,*//*int bno, PageMaker pageMaker,*/
 			Model model)throws Exception{
 		String url="redirect:detail.do";
 
-		pageMaker.setCri(cri);
+		/*pageMaker.setCri(cri);
 		
-		url=url+pageMaker.makeQuery();		
+		url += PageMaker.makeQuery();*/
+		
+		/*url = url + PageMaker.makeQuery(cri)+"&bno="+modifyReq.getBno();*/
+		
 		
 		BoardVO board = modifyReq.toBoardVO();	
 		
 		boardService.modify(board);
-		state = "modify";
 		
+		state = "modify";
 		model.addAttribute("state", state);
-		model.addAttribute("bno", bno);
+		model.addAttribute("bno",board.getBno());
+		//model.addAttribute("bno", bno);
 		
 		return url;
 		

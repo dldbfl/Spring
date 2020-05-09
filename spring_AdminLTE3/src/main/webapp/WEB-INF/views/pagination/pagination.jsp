@@ -45,19 +45,13 @@
 
 
 <script>
-function searchList_go(page,url){
+function searchList_go(page){
 	
 	var jobForm=$('#jobForm');
 	jobForm.find("[name='page']").val(page);
 	jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
 	jobForm.find("[name='keyword']").val($('div.input-group>input[name="keyword"]').val());	
 	jobForm.attr("action","list.do").attr("method","post");
-	
-	if(url){
-		jobForm.attr("action",url)
-	}else{
-		jobForm.attr("action","list.do")
-	}
 	jobForm.submit();
 }
 </script>
