@@ -48,7 +48,7 @@ public class PdsActionController {
 	@RequestMapping("list.do")
 	public ModelAndView list(SearchCriteria cri, ModelAndView mnv) throws Exception {
 		
-		String url = "pds/list";
+		String url = "pds/list.page";
 		
 		Map<String, Object> dataMap = pdsService.getList(cri);
 		
@@ -61,7 +61,7 @@ public class PdsActionController {
 
 	@RequestMapping("/registForm.do")
 	public ModelAndView registForm(ModelAndView mnv) throws Exception {
-		String url = "pds/regist";
+		String url = "pds/regist.open";
 		mnv.setViewName(url);
 		return mnv;
 	}
@@ -94,7 +94,7 @@ public class PdsActionController {
 	public ModelAndView modifyForm(ModelAndView mnv,
 			//@ModelAttribute("cri") SearchCriteria cri,
 			int pno) throws Exception {
-		String url = "pds/modify";
+		String url = "pds/modify.open";
 
 		PdsVO pds = pdsService.getPds(pno);
 
@@ -138,7 +138,7 @@ public class PdsActionController {
 	
 	@RequestMapping("detail.do")
 	public ModelAndView detail(ModelAndView mnv, int pno, String from) throws Exception {
-		String url = "pds/detail";
+		String url = "pds/detail.open";
 		
 		PdsVO pds =null; 
 		if(from!=null && from.equals("modify")) {

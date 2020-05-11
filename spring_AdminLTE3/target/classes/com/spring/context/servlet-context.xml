@@ -16,6 +16,36 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<!--  얘는 타일즈 뷰의 설정파일 위치라구! 빈으로 주니까 빈으로 설정파일을 받아.
+	<beans:bean id="tilesConfigurer"
+				class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+
+	 얘가 타일즈뷰야.
+	<beans:bean id="viewClass" class="java.lang.String">
+		<beans:constructor-arg value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+	</beans:bean>
+
+
+	order 1은 우선순위를 나타내 UrlBasedViewResolver얘는 디스패쳐와 연계할려고 필요함
+	ref는 레퍼런스의 약자야 까먹지말자
+	ref는 반드시 스트링이 들어가.
+	<beans:bean id= "tilesViewResolver"
+				class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+				p:viewClass-ref="viewClass"
+				p:order="1"
+				/>
+				이렇게 줘도됨
+				<bean:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+				<bean:property name="order" value="1"/> -->
+
+	<!-- 인덱스 주는거 -->
 	<view-controller path="/" view-name="index"/>
 	<view-controller path="/index.do" view-name="index"/>
 	<view-controller path="/index.htm" view-name="index"/>
@@ -27,10 +57,29 @@
 				p:defaultEncoding="utf-8"
 				/>
 
+	<!-- Tiles -->
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	<beans:bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	
+
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
 	
 	<context:component-scan base-package="com.spring.controller" />

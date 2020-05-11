@@ -32,7 +32,7 @@ public class BoardActionController {
 	@RequestMapping("list.do")
 	public String list(SearchCriteria cri, Model model,
 					 HttpServletRequest request)throws Exception{
-		String url = "board/list";
+		String url = "board/list.page";
 		
 		Map<String, Object> dataMap = boardService.getBoardList(cri);
 		
@@ -52,7 +52,7 @@ public class BoardActionController {
 	@RequestMapping("registForm.do")
 	public String registForm()throws Exception{
 		
-		String url = "board/registBoard";
+		String url = "board/registBoard.open";
 		
 		return url;		
 	}
@@ -61,7 +61,7 @@ public class BoardActionController {
 	@RequestMapping("modifyForm.do")
 	public String modifyForm(int bno,Model model)throws Exception{
 		
-		String url = "board/modifyBoard";
+		String url = "board/modifyBoard.open";
 		BoardVO board = boardService.getBoardForModify(bno);
 		
 		model.addAttribute("board", board);
@@ -128,7 +128,7 @@ public class BoardActionController {
 	
 	@RequestMapping("detail.do")
 	public String detail(int bno, String state,Model model)throws Exception{
-		String url = "board/detailBoard";
+		String url = "board/detailBoard.open";
 		
 		BoardVO board =new BoardVO();		
 		

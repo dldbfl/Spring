@@ -3,6 +3,7 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <head>
@@ -72,6 +73,7 @@
 						<th style="width:15%;">작성자</th>
 						<th>등록일</th>
 						<th style="width:10%;">조회수</th>
+						<th style="width:8%;">파일여부</th>
 					</tr>
 					<c:if test="${empty pdsList }">
 						<tr>
@@ -93,7 +95,16 @@
 						<td>
 							<fmt:formatDate value="${pds.regDate }" pattern="yyyy-MM-dd"/>
 						</td>
-						<td><span class="badge bg-red">${pds.viewcnt }</span></td>						
+						<td>
+							<span class="badge bg-red">${pds.viewcnt }</span>
+						</td>	
+						<td>
+							<c:if test="${!empty pds.attachList }"> 
+								 <div class="badge">
+									  <img src="<%=request.getContextPath()%>/resources/images/file.png" style="width:20px;height:20px;"> x  ${fn:length(pds.attachList)}
+								</div>							
+							</c:if> 
+						</td>	
 						</tr>					
 					</c:forEach>
 				</table>

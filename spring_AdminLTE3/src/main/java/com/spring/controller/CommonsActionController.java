@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.spring.service.MemberService;
@@ -15,7 +16,7 @@ import com.spring.exception.InvalidPasswordException;
 import com.spring.exception.NotFoundIDException;
 
 @Controller
-/*@RequestMapping("/commoms/*")*/ //url은 /가 두개붙어도 1개로 친다.
+@RequestMapping("/commons/*") //url은 /가 두개붙어도 1개로 친다.
 public class CommonsActionController {
 	
 	@Autowired
@@ -26,15 +27,17 @@ public class CommonsActionController {
 	
 	
 	
-	@RequestMapping({"/","/commons/loginForm.do"})
-	public String loginForm()throws Exception{
+	//@RequestMapping({"/","/commons/loginForm.do"})
+	@RequestMapping("loginForm.do")
+	public String loginForm(Model model)throws Exception{
 		
 		String url = "commons/loginForm";
+		model.addAttribute("title","로그인");
 		
 		return url;		
 	}
 	
-	@RequestMapping("/commons/login.do")
+	@RequestMapping("login.do")
 	public String login(String id, String pwd, HttpSession session, 
 						HttpServletRequest request)throws Exception{
 		String url="redirect:/member/list.do";
@@ -80,12 +83,13 @@ public class CommonsActionController {
 	}
 	
 	
-	@RequestMapping("/commons/logout.do")
-	public String logout(HttpSession session)throws Exception{
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session, Model model)throws Exception{
 		
-		String url = "redirect:/commons/loginForm.do";
+		String url = "commons/logout";
 		
 		session.invalidate();
+		model.addAttribute("msg","로그아웃되었소!");
 		
 		return url;		
 	}
