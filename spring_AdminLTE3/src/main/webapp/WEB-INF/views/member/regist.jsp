@@ -43,7 +43,7 @@
 								<div class="mailbox-attachment-info">
 									<div class="input-group input-group-sm">
 										<label for="inputFile" class=" btn btn-warning btn-sm btn-flat input-group-addon">파일선택</label>
-										<input id="inputFileName" class="form-control" type="text" name="picture" />
+										<input id="inputFileName" class="form-control" type="text" name="inputpicture" />
 										<span class="input-group-append-sm">											
 											<button type="button" class="btn btn-info btn-sm btn-append" onclick="upload_go();">업로드</button>											
 										</span>

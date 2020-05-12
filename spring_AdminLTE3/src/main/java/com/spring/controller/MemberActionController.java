@@ -1,6 +1,9 @@
 package com.spring.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +57,7 @@ public class MemberActionController {
 			
 		String url="member/list.page";
 		Map<String, Object> dataMap = memberService.getMemberList(cri);
-		dataMap.put("title", "회원리스트");
+	    model.addAttribute("title", "회원리스트");
 		//request 방식으로 예전처럼 넣기
 		/*request.setAttribute("memberList", (List<MemberVO>)dataMap.get("memberList"));
 		request.setAttribute("pageMaker", (PageMaker)dataMap.get("pageMaker"));*/
@@ -238,7 +242,7 @@ public class MemberActionController {
 		@ResponseBody
 		public ResponseEntity<String> uploadpicture(MultipartFile pictureFile,
 												    String oldPicture)throws Exception{
-			System.out.println(1);
+			
 			ResponseEntity<String> entity=null;		
 			File file = new File(picturePath);
 			if(!file.mkdirs()) {
@@ -279,11 +283,33 @@ public class MemberActionController {
 		
 
 		
-/*		@RequestMapping("/picture/get.do")
+		@RequestMapping("/picture/get.do")
 		@ResponseBody
 		public ResponseEntity<byte[]> getPicture(String picture)throws Exception{
+		
 			ResponseEntity<byte[]> entity=null;	
-			return entity;
-		}*/
+			
+			String imgPath = this.picturePath;
+			
+			InputStream in=null;
+			try {
+			
+				in=new FileInputStream(new File(imgPath,picture));
+			
+				entity=new ResponseEntity<byte[]>(IOUtils.toByteArray(in),HttpStatus.CREATED);
+			
+			}catch(IOException e){
+				
+				e.printStackTrace();
+			
+				entity=new ResponseEntity<byte[]>(HttpStatus.INTERNAL_SERVER_ERROR);
+			
+			}finally{
+				
+				in.close();
+				
+			}						
+				return entity;
+		}
 	}
 	
