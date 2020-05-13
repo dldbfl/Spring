@@ -96,7 +96,8 @@ $(document).ready(function() {
 	//clock
     setClock("ko");	//언어설정 추가   
       
-    
+    //파란 호버와 꺽쇠상태의 체크 설정을 위한 아작스
+    //없으면 안받는다.
     $.ajax({
 		url: "<%=request.getContextPath()%>/commons/topMenuHql",
 		dataType: "json",

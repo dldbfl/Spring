@@ -37,6 +37,8 @@ public class CommonController {
 	@ResponseBody
 	public ResponseEntity<Map<String,List<MenuVO>>> getMenu(HttpSession session) throws Exception{
 		
+		
+		//자체적으로 로그인 체크를 해야함. 안그러면 푸터에서 로그인 안할때 로그인페이지를 데이터로 보내버림
 		ResponseEntity<Map<String, List<MenuVO>>> result = null;
 		
 		Map<String, List<MenuVO>> menuMap = new HashMap<String, List<MenuVO>>();

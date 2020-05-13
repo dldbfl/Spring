@@ -11,9 +11,31 @@
 		  p:sqlSession-ref="sqlSession"
 		  />
 		  
+    <bean id="mybatisBoardDAO"
+          class="com.groupware.dao.board.MybatisBoardDAOImpl" 
+          p:session-ref="sqlSession"
+          />
+          
+    <bean id="pageMybatisBoardDAO"
+          class="com.groupware.dao.board.PageMybatisBoardDAOImpl" 
+          p:session-ref="sqlSession"
+          p:instance-ref="mybatisBoardDAO"
+          />
+          
+    <bean id="replyDAO"
+    	  class="com.groupware.dao.board.ReplyDAOImpl"
+    	  p:session-ref="sqlSession"
+    	  />
+          		  
     <!-- Service -->
 	<bean id="menuService"
 		  class="com.groupware.service.menu.MenuServiceImpl"
 		  p:menuDAO-ref="menuDAO"	      
 	      />
+    
+    <bean id="boardService"
+          class="com.groupware.service.board.BoardServiceImpl"
+          p:boardDAO-ref="pageMybatisBoardDAO"
+          p:replyDAO-ref="replyDAO"          
+          />
 </beans>

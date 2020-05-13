@@ -8,7 +8,7 @@ window.onpopstate = function(event) {
 	}
 };
 
-
+//이걸로'새로고침'하면 날아가는 서브메뉴등을 상태유지를 하기 위해 쓴다구요.
 function reURL(mCode) {
     // HTML5 지원브라우저에서 사용 가능
     if (typeof(history.pushState) == 'function') {
@@ -28,6 +28,7 @@ function reURL(mCode) {
             history.pushState(mCode, null, renewURL);
         }
     } else {
+    	//hash는 주소줄을(브라우저를) 이렇게 되도록 착각하게 많드는곳.
         location.hash = "#"+mCode;
     }
 }
@@ -270,7 +271,7 @@ function loadSidebar(mCode, sCode) {
     	type: 'post' ,
     	dataType: 'html',
     	async: true,
-    	url: '/conmons/subMenuHql',
+    	url: '/commons/subMenuHql',
         data: { 'mCode': sCode },       
         success: function(data, status, xhr) {
         	
@@ -391,7 +392,7 @@ function onSubMenu(mCode) {
                 $this.ace_sidebar_scroll('scroll_to_active');//first time only
             });*/
 
-            //프로젝트에서만 사용하는 전달 값
+            /*  //프로젝트에서만 사용하는 전달 값
             var isProj = mCode.indexOf("MENU16") == 0;
             var projParam = "";
             if (isProj) {
@@ -402,7 +403,7 @@ function onSubMenu(mCode) {
                 }
                 projParam += "workType=2&moduleId=" + projModuleId;
             }
-            //커뮤니티 게시판은 submenu.jsp에서 처리됨
+          //커뮤니티 게시판은 submenu.jsp에서 처리됨
             //커뮤니티 일정 에서만 사용하는 전달 값
             var isClub = mCode.indexOf("MENU1907") == 0;
             if (isClub) {
@@ -449,8 +450,8 @@ function onSubMenu(mCode) {
             	}
             	projParam += "workType=3&clubId=" + clubModuleId;
             }
-
-            $("#if_list").attr("src", link_element.attr("data-url")+projParam);
+			*/
+            $("#if_list").attr("src", link_element.attr("data-url"));
             //if ($("#if_list").attr("src") != link_element.attr("data-url")+projParam) {
             //}
             
