@@ -43,7 +43,8 @@ public interface EmployeeService {
 	//최종로그인 시간 수정
 	void recentLoginTime(String id)throws SQLException;
 	
-	
+	//회원아이디 중복체크
+	void checkId(String id)throws SQLException,IdNotFoundException;
 }
 
 

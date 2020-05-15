@@ -9,5 +9,8 @@
 		<context:property-placeholder location="classpath:com/groupware/properties/*.properties"/>
 		
 		<import resource="classpath:com/groupware/context/dataSource-context.xml"/>	
-	 	<import resource="classpath:com/groupware/context/application-context.xml"/> 
+	 	<import resource="classpath:com/groupware/context/application-context.xml"/>
+	 	<import resource="classpath:com/groupware/context/aop-context.xml"/>
+	 	<import resource="classpath:com/groupware/context/security-context.xml"/>
+	 	 
 </beans>

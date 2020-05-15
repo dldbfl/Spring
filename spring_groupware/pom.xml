@@ -19,6 +19,7 @@
 	<properties>
 		<java-version>1.7</java-version>
 		<org.springframework-version>3.2.6.RELEASE</org.springframework-version>
+		<spring.security-verison>3.2.0.RELEASE</spring.security-verison>
 		<oracle.ojdbc-version>11.2.0.3</oracle.ojdbc-version>
 		<commons.dbcp-version>2.4.0</commons.dbcp-version>
 		<mybatis-version>3.2.8</mybatis-version>
@@ -27,6 +28,7 @@
 		<jackson.databind-version>2.9.8</jackson.databind-version>
 		<commons.fileupload-version>1.3.1</commons.fileupload-version>
 		<log4jdbc.remix-version>0.2.7</log4jdbc.remix-version>	
+		<aspectjweaver-vesion>1.9.2</aspectjweaver-vesion>		
 				
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
@@ -115,6 +117,36 @@
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>${commons.fileupload-version}</version>
 		</dependency>		
+				
+				
+		<!-- aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${aspectjweaver-vesion}</version>
+		</dependency>
+				
+				
+		<!-- spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${spring.security-verison}</version>
+		</dependency>
+		
+		<!-- spring-security-config -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>${spring.security-verison}</version>
+		</dependency>
+		
+		<!-- spring-security-taglibs -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>${spring.security-verison}</version>
+		</dependency>
 				
 				
 		<!-- AspectJ -->

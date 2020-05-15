@@ -66,4 +66,6 @@ public class CommonController {
 		
 	}
 	
+	@RequestMapping("/commons/login")
+	public void loginForm() {}
 }

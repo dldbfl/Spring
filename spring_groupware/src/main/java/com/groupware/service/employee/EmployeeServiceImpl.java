@@ -5,14 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hamcrest.core.IsNull;
+
 import com.groupware.dao.employee.CareerDAO;
 import com.groupware.dao.employee.EmployeeDAO;
 import com.groupware.dto.CareerVO;
 import com.groupware.dto.EmployeeVO;
-import com.groupware.request.PageMaker;
-import com.groupware.request.SearchCriteria;
 import com.groupware.exception.IdNotFoundException;
 import com.groupware.exception.InvalidPasswordException;
+import com.groupware.request.PageMaker;
+import com.groupware.request.SearchCriteria;
 import com.groupware.utils.DataFormat;
 
 public class EmployeeServiceImpl implements EmployeeService{
@@ -121,6 +123,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public void recentLoginTime(String id) throws SQLException {
 		employeeDAO.updateRecentLoginTime(id);
 		
+	}
+
+	@Override
+	public void checkId(String id) throws SQLException,IdNotFoundException{
+		EmployeeVO employee = employeeDAO.selectEmployeeById(id);
+		
+		if(employee == null) throw new IdNotFoundException();
 	}
 	
 	

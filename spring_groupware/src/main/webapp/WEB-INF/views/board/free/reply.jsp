@@ -8,11 +8,12 @@
 	{{#each .}}
 		<div class="itemdiv dialogdiv replyLi" data-rno={{rno}}>
 			<div class="user">
-				<img alt="Jennifer's Avatar" src="<%=request.getContextPath() %>/resources/images/avatar4.png">
+				<img src="<%=request.getContextPath() %>/employee/picture/{{replyer}}"
+					 onerror="this.src='<%=request.getContextPath() %>/resources/images/avatar4.png'">
 			</div>
 			<div class="body">
 				<div class="name" style="cursor: pointer;">
-					<a class="maninfo" rel="20051014164401" data-hasqtip="2">{{replyer}}</a>
+					<a class="maninfo"  data-hasqtip="2">{{replyer}}</a>
 				</div>
 				<div class="time">
 					 <a class="btn btn-primary btn-xs" id="modifyReplyBtn" style="display:{{loginUserCheck replyer}};"
